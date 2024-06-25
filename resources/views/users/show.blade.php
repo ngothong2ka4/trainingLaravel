@@ -18,7 +18,11 @@ Show User
                     Email: {{ $user->email }}
                 </div>
                 <div>
-                    Role: {{ $user->role_id }}
+                    Type:   @if ($user->type == 1)
+                                {!! '<span class="badge bg-primary">Admin</span>' !!}
+                            @elseif ($user->type == 2)
+                                {!! '<span class="badge bg-info">User</span>' !!}
+                            @endif
                 </div>
 
                 <div class="mt-4">

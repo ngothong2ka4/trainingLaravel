@@ -37,12 +37,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
         /**
          * Role Routes
-         */
-        Route::resource('roles', RolesController::class);
-        /**
-         * Permission Routes
-         */
-        Route::resource('permissions', PermissionsController::class);
+        //  */
+        // Route::resource('roles', RolesController::class);
+        // /**
+        //  * Permission Routes
+        //  */
+        // Route::resource('permissions', PermissionsController::class);
         /**
          * User Routes
          */
