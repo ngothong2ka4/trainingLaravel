@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('status_id');
             $table->decimal('price', 8, 2);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('status')->onDelete('cascade');

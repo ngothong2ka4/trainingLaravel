@@ -18,11 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->unsignedBigInteger('type');
+            $table->unsignedBigInteger('type')->comment('1: admin | 2: customer');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 
