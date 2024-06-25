@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
                 Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
             });
         });
+        Route::group(['middleware' => 'auth'], function () {
+            Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+            Route::get('categories/create', [CategoryController::class, 'create'])->name('categories.create');
+            Route::post('categories/store', [CategoryController::class, 'store'])->name('categories.store');
+//            Route::get('categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+            Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+            Route::put('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+            Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+        });
+
+
+
     });
     Route::group(['prefix' => 'fe'], function() {
 

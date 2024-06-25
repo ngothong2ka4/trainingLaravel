@@ -18,20 +18,11 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('roles.index') }}">
+        <a class="nav-link {{ request()->is('categories*') ? 'active' : ''}}" href="{{ route('categories.index') }}">
             <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
             </svg>
-            {{ __('Roles') }}
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link {{ request()->is('permissions*') ? 'active' : ''}}" href="{{ route('permissions.index') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-room') }}"></use>
-            </svg>
-            {{ __('Permissions') }}
+            {{ __('Categories') }}
         </a>
     </li>
 
