@@ -6,9 +6,9 @@ Create User
 
 @section('content')
     <div class="bg-light p-4 rounded">
-        <h1>Add new user</h1>
+        <h1>Thêm mới người dùng</h1>
         <div class="lead">
-            Add new user and assign role.
+            Thêm người dùng mới và gán vai trò.
         </div>
 
         <div class="container mt-4">
@@ -38,14 +38,25 @@ Create User
                     @endif
                 </div>
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input value="{{ old('username') }}"
+                    <label for="password" class="form-label">Password</label>
+                    <input value="{{ old('password') }}"
                         type="text" 
                         class="form-control" 
-                        name="username" 
-                        placeholder="Username" required>
-                    @if ($errors->has('username'))
-                        <span class="text-danger text-left">{{ $errors->first('username') }}</span>
+                        name="password" 
+                        placeholder="password" required>
+                    @if ($errors->has('password'))
+                        <span class="text-danger text-left">{{ $errors->first('password') }}</span>
+                    @endif
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Type</label>
+                    <select name="role_id" id="" class="form-select">
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('role_id'))
+                        <span class="text-danger text-left">{{ $errors->first('role_id') }}</span>
                     @endif
                 </div>
 

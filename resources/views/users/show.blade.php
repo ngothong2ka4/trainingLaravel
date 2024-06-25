@@ -18,7 +18,7 @@ Show User
                     Email: {{ $user->email }}
                 </div>
                 <div>
-                    Username: {{ $user->username }}
+                    Role: {{ $user->role_id }}
                 </div>
 
                 <div class="mt-4">

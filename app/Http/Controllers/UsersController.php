@@ -17,7 +17,8 @@ class UsersController extends Controller
      */
     public function index() 
     {
-        $users = User::latest()->paginate(10);
+        $users = User::query()->with('role')->latest('id')->paginate(5);
+        // dd($users);
 
         return view('users.index', compact('users'));
     }
@@ -29,7 +30,9 @@ class UsersController extends Controller
      */
     public function create() 
     {
-        return view('users.create');
+        $roles = Role::query()->select('id', 'name')->get();
+        // dd($roles);
+        return view('users.create',compact('roles'));
     }
 
     /**
@@ -42,10 +45,10 @@ class UsersController extends Controller
      */
     public function store(User $user, StoreUserRequest $request) 
     {
-        //For demo purposes only. When creating user or inviting a user
-        // you should create a generated random password and email it to the user
+        
+        // dd(array_merge($request->validated()) );
         $user->create(array_merge($request->validated(), [
-            'password' => 'test' 
+            'password' => bcrypt($request->password),
         ]));
 
         return redirect()->route('users.index')
@@ -58,9 +61,10 @@ class UsersController extends Controller
      * @param User $user
      * 
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function show(User $user) 
     {
+        dd($user);
         return view('users.show', [
             'user' => $user
         ]);

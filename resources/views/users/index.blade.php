@@ -9,14 +9,14 @@ User List
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Users</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Manage your users here.</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Quản lý danh sách User ở đây.</h6>
 
             <div class="mt-2">
                 @include('layouts.includes.messages')
             </div>
 
             <div class="mb-2 text-end">
-                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right">Add user</a>
+                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right">Thêm User</a>
             </div>
 
             <table class="table table-striped">
@@ -24,10 +24,10 @@ User List
                     <tr>
                         <th scope="col" width="1%">#</th>
                         <th scope="col" width="15%">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col" width="10%">Username</th>
-                        <th scope="col" width="10%">Roles</th>
-                        <th scope="col" width="1%" colspan="3"></th>
+                        <th scope="col" width="10%">Email</th>
+                        {{-- <th scope="col" width="10%">Username</th> --}}
+                        <th scope="col" width="5%">Roles</th>
+                        <th scope="col" width="1%" colspan="4"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,11 +36,8 @@ User List
                         <th scope="row">{{ $user->id }}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->username }}</td>
                         <td>
-                            @foreach($user->roles as $role)
-                            <span class="badge bg-primary">{{ $role->name }}</span>
-                            @endforeach
+                            {{ $user->role->name }}
                         </td>
                         <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">Show</a></td>
                         <td><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm">Edit</a></td>
