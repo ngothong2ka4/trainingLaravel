@@ -7,21 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, HasRoles, Notifiable, SoftDeletes;
-
-    // protected $guarded = [
-    //     'id',
-    //     'updated_at',
-    //     '_token',
-    //     '_method',
-    //     'password_confirmation',
-    // ];
-
+    use HasFactory, HasRoles, Notifiable, SoftDeletes,HasApiTokens;
 
     protected $fillable = [
         'name',

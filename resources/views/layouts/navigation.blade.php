@@ -18,22 +18,22 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('roles.index') }}">
+        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('product.index') }}">
             <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>
             </svg>
-            {{ __('Roles') }}
+            {{ __('Products') }}
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ request()->is('permissions*') ? 'active' : ''}}" href="{{ route('permissions.index') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-room') }}"></use>
-            </svg>
-            {{ __('Permissions') }}
-        </a>
-    </li>
+{{--    <li class="nav-item">--}}
+{{--        <a class="nav-link {{ request()->is('permissions*') ? 'active' : ''}}" href="{{ route('permissions.index') }}">--}}
+{{--            <svg class="nav-icon">--}}
+{{--                <use xlink:href="{{ asset('icons/coreui.svg#cil-room') }}"></use>--}}
+{{--            </svg>--}}
+{{--            {{ __('Permissions') }}--}}
+{{--        </a>--}}
+{{--    </li>--}}
 
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">

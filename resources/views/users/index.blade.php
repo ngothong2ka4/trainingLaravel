@@ -36,9 +36,9 @@ User List
                         <th scope="row">{{ $user->id }}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>
-                            {{ $user->role->name }}
-                        </td>
+{{--                        <td>--}}
+{{--                            {{ $user->role->name }}--}}
+{{--                        </td>--}}
                         <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">Show</a></td>
                         <td><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm">Edit</a></td>
                         <td>

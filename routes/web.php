@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +57,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
                 Route::get('/{user}/edit', 'UsersController@edit')->name('users.edit');
                 Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
                 Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
+            });
+
+            //Product
+            Route::group(['prefix' => 'product'], function () {
+               Route::get('/',[ProductController::class,'index'])->name('product.index');
+               Route::get('/add-product',[ProductController::class,'create'])->name('product.create');
+               Route::post('/add-product',[ProductController::class,'store'])->name('product.store');
             });
         });
     });
