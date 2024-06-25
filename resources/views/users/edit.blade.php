@@ -11,13 +11,17 @@ Edit User
             <h5 class="card-title">Update user</h5>
 
             <div class="container mt-4">
-                <form method="post" action="{{ route('users.update', $user->id) }}">
+                <form method="post" action="{{ route('users.update', $user->id) }}" id="userForm">
                     @method('patch')
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input value="{{ $user->name }}" type="text" class="form-control" name="name" placeholder="Name"
                             required>
+
+                        @error('name')
+                            span class="text-danger">{{ $message }}</span>
+                        @enderror
 
                         @if ($errors->has('name'))
                         <span class="text-danger text-left">{{ $errors->first('name') }}</span>
@@ -27,27 +31,25 @@ Edit User
                         <label for="email" class="form-label">Email</label>
                         <input value="{{ $user->email }}" type="email" class="form-control" name="email"
                             placeholder="Email address" required>
-                        @if ($errors->has('email'))
+                        
+                        @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        
+                            @if ($errors->has('email'))
                         <span class="text-danger text-left">{{ $errors->first('email') }}</span>
                         @endif
                     </div>
+                    
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input value="{{ $user->username }}" type="text" class="form-control" name="username"
-                            placeholder="Username" required>
-                        @if ($errors->has('username'))
-                        <span class="text-danger text-left">{{ $errors->first('username') }}</span>
-                        @endif
-                    </div>
-                    <div class="mb-3">
-                        <label for="role" class="form-label">Role</label>
-                        <select class="form-control" name="role" required>
-                            <option value="">Select role</option>
-                            @foreach($roles as $role)
-                            <option value="{{ $role->id }}" {{ in_array($role->name, $userRole) 
+                        <label for="type" class="form-label">Type</label>
+                        <select class="form-control" name="type" required>
+                            <option value="1" {{ $user->type ==1
                                     ? 'selected'
-                                    : '' }}>{{ $role->name }}</option>
-                            @endforeach
+                                    : '' }}>Admin</option>
+                            <option value="2" {{ $user->type ==2
+                                    ? 'selected'
+                                    : '' }}>User</option>
                         </select>
                         @if ($errors->has('role'))
                         <span class="text-danger text-left">{{ $errors->first('role') }}</span>
@@ -63,3 +65,39 @@ Edit User
 
 </div>
 @endsection
+
+@push('after-scripts')
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            $('#userForm').validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 3
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "Please enter your name",
+                        minlength: "Your name must be at least 3 characters long"
+                    },
+                    email: {
+                        required: "Please enter an email address",
+                        email: "Please enter a valid email address"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('text-danger');
+                    error.insertAfter(element);
+                }
+        });
+    });
+    </script>
+@endpush

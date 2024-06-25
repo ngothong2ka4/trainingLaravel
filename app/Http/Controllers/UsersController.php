@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -15,12 +16,35 @@ class UsersController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index(Request $request) 
     {
-        $users = User::query()->with('role')->latest('id')->paginate(5);
-        // dd($users);
+        // Lấy giá trị từ request
+        $nameOrEmail = $request->input('name_email');
+        $type = $request->input('type');
 
-        return view('users.index', compact('users'));
+        // Bắt đầu xây dựng truy vấn dựa trên điều kiện từ form
+        $usersQuery = User::query();
+
+        // Kiểm tra và thêm điều kiện vào truy vấn
+        if (!empty($nameOrEmail)) {
+            $usersQuery->where(function ($query) use ($nameOrEmail) {
+                $query->where('name', 'like', '%' . $nameOrEmail . '%')
+                      ->orWhere('email', 'like', '%' . $nameOrEmail . '%');
+            });
+        }
+
+        if (!empty($type)) {
+            $usersQuery->where('type', $type);
+        }
+
+        // Thực hiện truy vấn để lấy danh sách người dùng
+        $users = $usersQuery->latest('id')->paginate(5); // Thay đổi số lượng user the thay
+
+        return view('users.index', [
+            'users' => $users,
+            'nameOrEmail' => $nameOrEmail, // Trả về lại giá trị đã tìm kiếm để điền lại vào form
+            'type' => $type, // Trả về lại giá trị type để điền lại vào form
+        ]);
     }
 
     /**
@@ -30,9 +54,8 @@ class UsersController extends Controller
      */
     public function create() 
     {
-        $roles = Role::query()->select('id', 'name')->get();
-        // dd($roles);
-        return view('users.create',compact('roles'));
+        
+        return view('users.create');
     }
 
     /**
@@ -48,7 +71,7 @@ class UsersController extends Controller
         
         // dd(array_merge($request->validated()) );
         $user->create(array_merge($request->validated(), [
-            'password' => bcrypt($request->password),
+            'password' => Hash::make($request->password),
         ]));
 
         return redirect()->route('users.index')
@@ -64,7 +87,7 @@ class UsersController extends Controller
      */ 
     public function show(User $user) 
     {
-        dd($user);
+        // dd($user);
         return view('users.show', [
             'user' => $user
         ]);
@@ -81,8 +104,8 @@ class UsersController extends Controller
     {
         return view('users.edit', [
             'user' => $user,
-            'userRole' => $user->roles->pluck('name')->toArray(),
-            'roles' => Role::latest()->get()
+            // 'userRole' => $user->roles->pluck('name')->toArray(),
+            // 'roles' => Role::latest()->get()
         ]);
     }
 
@@ -96,9 +119,9 @@ class UsersController extends Controller
      */
     public function update(User $user, UpdateUserRequest $request) 
     {
+        // dd($request->all());
         $user->update($request->validated());
 
-        $user->syncRoles($request->get('role'));
 
         return redirect()->route('users.index')
             ->withSuccess(__('User updated successfully.'));
