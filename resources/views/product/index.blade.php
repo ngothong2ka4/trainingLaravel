@@ -34,25 +34,26 @@ Product list
                 @foreach ($products as $key => $product)
                 <tr>
                     <td>{{ $product->id }}</td>
-                    <td><img src="{{ $product->image }}" style="width: 100px;height: 100px;"></td>
+                    <td><img src="{{ asset($product->image) }}" style="width: 100px;height: 100px;"></td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->category->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->sold }}</td>
                     <td>{{ $product->status }}</td>
                     <td>{{ \Carbon\Carbon::parse($product->updated_at)->format('Y/m/d H:i') }}</td>
-{{--                    <td>--}}
-{{--                        <a class="btn btn-info btn-sm" href="{{ route('roles.show', $role->id) }}">Show</a>--}}
-{{--                    </td>--}}
-{{--                    <td>--}}
-{{--                        <a class="btn btn-primary btn-sm" href="{{ route('roles.edit', $role->id) }}">Edit</a>--}}
-{{--                    </td>--}}
-{{--                    <td>--}}
-{{--                        {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy',--}}
-{{--                        $role->id],'style'=>'display:inline']) !!}--}}
-{{--                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}--}}
-{{--                        {!! Form::close() !!}--}}
-{{--                    </td>--}}
+                    <td>
+                        <a class="btn btn-info btn-sm" href="{{ route('product.show',$product->id) }}">Show</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="{{ route('product.edit',$product->id) }}">Edit</a>
+                    </td>
+                    <td>
+                        <form action="{{ route('product.destroy', $product->id) }}" method="POST">
+                            @csrf
+                            @method('post')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
 

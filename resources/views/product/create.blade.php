@@ -12,7 +12,7 @@
                 <div class="p-4 rounded">
                     <div class="container mt-4">
 
-                        <form method="POST" action="{{ route('product.store') }}">
+                        <form method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>

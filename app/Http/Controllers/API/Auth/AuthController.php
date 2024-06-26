@@ -6,33 +6,38 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Traits\ApiResponse;
 class AuthController extends Controller
 {
+    use ApiResponse;
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login']]);
+    }
     public function login(Request $request)
     {
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $user = User::where('id', Auth::User()->id)->first();
-            $token = $user->createToken('access_token')->plainTextToken;
+        $credentials = $request->only('email', 'password');
+        $token = Auth::attempt($credentials);
 
-            return response()->json([
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-                'status' => 200,
-            ]);
+        if (!$token) {
+            return $this->error('Unauthorized',401,[]);
         }
 
-        return response()->json([
-            'message' => 'Unauthorized'
-        ], 401);
+        $user = Auth::user();
+
+        return $this->success([
+            'user' => $user,
+            'authorization' => [
+                'token' => $token,
+                'type' => 'bearer',
+            ]],'Login successfully',200);
     }
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
-
-        return response()->json([
-            'message' => 'Tokens Revoked'
-        ]);
+        Auth::logout();
+        return $this->success([],'Successfully Logout!',200);
     }
+
+
 }
