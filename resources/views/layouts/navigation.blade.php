@@ -19,19 +19,12 @@
 
     {{-- <li class="nav-item">
         <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('roles.index') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
-            </svg>
-            {{ __('Roles') }}
-        </a>
-    </li>
-
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('permissions*') ? 'active' : ''}}" href="{{ route('permissions.index') }}">
+        <a class="nav-link {{ request()->is('categories*') ? 'active' : ''}}" href="{{ route('categories.index') }}">
             <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-room') }}"></use>
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
             </svg>
-            {{ __('Permissions') }}
+            {{ __('Categories') }}
         </a>
     </li> --}}
 
