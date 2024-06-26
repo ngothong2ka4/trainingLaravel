@@ -15,13 +15,14 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $products = Product::with('category')
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
+        $categories = Category::select('id','name')->get();
 
-        return view('product.index',compact('products'));
+        return view('product.index',compact('products','categories'));
     }
 
     /**
