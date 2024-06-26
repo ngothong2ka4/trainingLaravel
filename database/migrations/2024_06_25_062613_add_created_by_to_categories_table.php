@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->string('created_by')->nullable()->change(); // Sửa kiểu dữ liệu thành string và cho phép null
-            $table->string('slug')->nullable()->change(); // Cho phép cột slug có thể null
+            $table->string('created_by')->nullable()->change();
+            $table->string('slug')->nullable()->change();
         });
     }
 

@@ -30,7 +30,7 @@
                         <th scope="col">Created by</th>
                         <th scope="col">Created at</th>
                         <th scope="col">Updated at</th>
-                        <th scope="col" colspan="3" width="1%">Action</th>
+                        <th scope="col" colspan="3" width="1%"></th>
                     </tr>
                     </thead>
                     <tbody>
