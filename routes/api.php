@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;use App\Http\Controllers\Auth\LoginControll
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => ['auth:api']], function () {
+Route::group(['middleware' => ['token_auth']], function () {
     Route::get('/user',function (Request $request){
         return $request->user();
     });
