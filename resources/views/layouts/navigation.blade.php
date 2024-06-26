@@ -17,8 +17,6 @@
         </a>
     </li>
 
-    {{-- <li class="nav-item">
-        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('roles.index') }}">
     <li class="nav-item">
         <a class="nav-link {{ request()->is('categories*') ? 'active' : ''}}" href="{{ route('categories.index') }}">
             <svg class="nav-icon">
@@ -26,7 +24,7 @@
             </svg>
             {{ __('Categories') }}
         </a>
-    </li> --}}
+    </li>
 
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
