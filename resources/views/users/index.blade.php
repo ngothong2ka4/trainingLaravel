@@ -96,4 +96,3 @@ User List
     </div>
 </div>
 @endsection
-

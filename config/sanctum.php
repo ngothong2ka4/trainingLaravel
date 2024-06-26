@@ -58,6 +58,7 @@ return [
     | request. You may change the middleware listed below as required.
     |
     */
+    'token_prefix' => env('SANCTUM_TOKEN_PREFIX', ''),
 
     'middleware' => [
         'verify_csrf_token' => App\Http\Middleware\VerifyCsrfToken::class,

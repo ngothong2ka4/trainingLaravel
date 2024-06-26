@@ -8,10 +8,11 @@
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
-        "laravel/sanctum": "^3.2",
+        "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.0",
         "laravelcollective/html": "^6.4",
+        "php-open-source-saver/jwt-auth": "^2.3",
         "spatie/laravel-medialibrary": "^10.7",
         "spatie/laravel-permission": "^5.9",
         "yoeunes/toastr": "^2.3"
@@ -32,7 +33,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Common/uploadFile.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
