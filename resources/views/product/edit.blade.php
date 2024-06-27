@@ -56,7 +56,7 @@
                                 <option value="0" @if($product->status == 0) selected @endif>Inactive</option>
                             </select>
                             <div class="d-flex justify-content-between">
-                                <a href="{{ route('product.index') }}" class="btn btn-success">Back</a>
+                                <a href="{{ route('product.index') }}" class="btn btn-success text-light">Back</a>
                                 <button type="submit" class="btn btn-primary">Save user</button>
                             </div>
                             <input type="hidden" value="{{ $product->id }}" name="id">

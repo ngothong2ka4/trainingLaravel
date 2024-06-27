@@ -92,14 +92,14 @@
                     },
                     messages: {
                         name: {
-                            required: "Please enter your name",
+                            required: "Please enter your name.",
                             minlength: "Your name must be at least 3 characters long"
                         },
                         category_id: {
-                            required: "Please enter select an category",
+                            required: "Please enter select an category.",
                         },
                         price: {
-                            required: "Please enter a price",
+                            required: "Please enter a price.",
                         }
                     },
                     errorElement: 'span',
