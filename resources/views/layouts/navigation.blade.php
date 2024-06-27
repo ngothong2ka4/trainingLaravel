@@ -4,7 +4,7 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
             </svg>
-            {{ __('Dashboard') }}
+            {{ __('Dshboard') }}
         </a>
     </li>
 
@@ -18,31 +18,29 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('categories.index') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>
-            </svg>
-            {{ __('Categories') }}
-        </a>
-    </li>
-
-    <li class="nav-item">
         <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('product.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>
             </svg>
-            {{ __('Products') }}
+            {{ __('Product') }}
         </a>
     </li>
-
-{{--    <li class="nav-item">--}}
-{{--        <a class="nav-link {{ request()->is('permissions*') ? 'active' : ''}}" href="{{ route('permissions.index') }}">--}}
-{{--            <svg class="nav-icon">--}}
-{{--                <use xlink:href="{{ asset('icons/coreui.svg#cil-room') }}"></use>--}}
-{{--            </svg>--}}
-{{--            {{ __('Permissions') }}--}}
-{{--        </a>--}}
-{{--    </li>--}}
+    <li class="nav-item">
+        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('categories.index') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-folder') }}"></use>
+            </svg>
+            {{ __('Categories') }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('order.index') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>
+            </svg>
+            {{ __('Order') }}
+        </a>
+    </li>
 
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">

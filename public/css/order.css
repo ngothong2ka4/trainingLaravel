@@ -1,0 +1,16 @@
+.center-divider {
+    padding: 20px;
+    width: 90%;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.ml-20 {
+    margin-left: 50px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+    margin-left: 10px;
+}

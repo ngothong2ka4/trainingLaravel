@@ -79,8 +79,8 @@
                             <td>{{ $loop->iteration + $products->perPage() * ($products->currentPage() - 1) }}</td>
                             <td><img src="{{ asset($product->image) }}" style="width: 100px;height: 100px;"></td>
                             <td>{{ $product->name }}</td>
-                            <td>{{ $product->category->name }}</td>
-                            <td>{{ $product->price }} VNĐ</td>
+                            <td>{{ $product->category?->name }}</td>
+                            <td>{{ $product->price }}</td>
                             <td>{{ $product->sold }}</td>
                             <td>
                                 <span class="badge bg-{{$product->status == 1 ? 'success' : 'secondary'}}">

@@ -5,7 +5,8 @@ User List
 @endsection
 
 @push('before-styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -77,8 +78,8 @@ User List
                             </a>
                         </td>
                         <td>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline', 'onsubmit' => 'return confirm("Are you sure you want to delete this user??");']) !!}
-                                <button type="submit" style="background: none; border: none; padding: 0; margin: 0; color: #000000;">
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline', 'id' => 'delete-form-' . $user->id]) !!}
+                                <button type="button" style="background: none; border: none; padding: 0; margin: 0; color: #000000;" onclick="confirmDelete({{ $user->id }})">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             {!! Form::close() !!}
@@ -96,3 +97,24 @@ User List
     </div>
 </div>
 @endsection
+
+@push('before-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <script>
+        function confirmDelete(userId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + userId).submit();
+            }
+        })
+        }
+    </script>
+@endpush

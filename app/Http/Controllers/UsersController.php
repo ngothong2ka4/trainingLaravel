@@ -13,10 +13,10 @@ class UsersController extends Controller
 {
     /**
      * Display all users
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) 
+    public function index(Request $request)
     {
         // Lấy giá trị từ request
         $nameOrEmail = $request->input('name_email');
@@ -49,26 +49,26 @@ class UsersController extends Controller
 
     /**
      * Show form for creating user
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function create() 
+    public function create()
     {
-        
+
         return view('users.create');
     }
 
     /**
      * Store a newly created user
-     * 
+     *
      * @param User $user
      * @param StoreUserRequest $request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(User $user, StoreUserRequest $request) 
+    public function store(User $user, StoreUserRequest $request)
     {
-        
+
         // dd(array_merge($request->validated()) );
         $user->create(array_merge($request->validated(), [
             'password' => Hash::make($request->password),
@@ -80,12 +80,12 @@ class UsersController extends Controller
 
     /**
      * Show user data
-     * 
+     *
      * @param User $user
-     * 
+     *
      * @return \Illuminate\Http\Response
-     */ 
-    public function show(User $user) 
+     */
+    public function show(User $user)
     {
         // dd($user);
         return view('users.show', [
@@ -95,12 +95,12 @@ class UsersController extends Controller
 
     /**
      * Edit user data
-     * 
+     *
      * @param User $user
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user) 
+    public function edit(User $user)
     {
         return view('users.edit', [
             'user' => $user,
@@ -111,34 +111,32 @@ class UsersController extends Controller
 
     /**
      * Update user data
-     * 
+     *
      * @param User $user
      * @param UpdateUserRequest $request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user, UpdateUserRequest $request) 
+    public function update(User $user, UpdateUserRequest $request)
     {
         // dd($request->all());
         $user->update($request->validated());
 
 
-        return redirect()->route('users.index')
-            ->withSuccess(__('User updated successfully.'));
+        return redirect()->route('categories.index')->with('success', 'User created successfully.');
     }
 
     /**
      * Delete user data
-     * 
+     *
      * @param User $user
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user) 
+    public function destroy(User $user)
     {
         $user->delete();
 
-        return redirect()->route('users.index')
-            ->withSuccess(__('User deleted successfully.'));
+        return redirect()->route('users.index')->with('success', 'User Delete successfully.');
     }
 }

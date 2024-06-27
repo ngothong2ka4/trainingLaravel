@@ -16,6 +16,7 @@
 
 @section('content')
     @include('dashboard')
+    
 @endsection
 @push('before-scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
