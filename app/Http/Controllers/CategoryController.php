@@ -6,7 +6,9 @@ use App\Http\Requests\CategoryRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {

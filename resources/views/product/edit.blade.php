@@ -4,15 +4,20 @@
     Update product
 @endsection
 
+@push('before-styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
+@endpush
+
 @section('content')
     <div class="bg-light rounded">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{{ $productName }} Info</h5>
+                <h5 class="card-title">{{ $product->name }} Info</h5>
                 <div class="p-4 rounded">
                     <div class="container mt-4">
 
-                        <form method="POST" action="{{ route('product.update',$product->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('product.update') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
@@ -47,26 +52,31 @@
                             </div>
                             <label for="status" class="form-label">Status</label>
                             <select class="form-select mb-3" name="status" aria-label="Default select example">
-                                @if($product->status == 1)
-                                    <option value="1" selected>Active</option>
-                                @endif
-                                    <option value="0">Inactive</option>
+                                <option value="1" @if($product->status == 1) selected @endif>Active</option>
+                                <option value="0" @if($product->status == 0) selected @endif>Inactive</option>
                             </select>
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('product.index') }}" class="btn btn-success">Back</a>
                                 <button type="submit" class="btn btn-primary">Save user</button>
                             </div>
+                            <input type="hidden" value="{{ $product->id }}" name="id">
                         </form>
                     </div>
 
                 </div>
             </div>
         </div>
-
         @endsection
-
-        @push('after-scripts')
-            <script type="text/javascript">
-
+        @push('before-scripts')
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+            <script>
+                @if(session('msg'))
+                Swal.fire({
+                    title: 'Success!',
+                    text: '{{ session('msg') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                @endif
             </script>
     @endpush

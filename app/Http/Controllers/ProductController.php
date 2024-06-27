@@ -17,13 +17,43 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::with('category')
-            ->orderBy('updated_at', 'desc')
-            ->paginate(10);
-        $categories = Category::select('id','name')->get();
+        $name = $request->input('name', null);
+        $category_id = $request->input('category_id', null);
+        $price = $request->input('price',null);
+        $sold = $request->input('sold',null);
 
-        return view('product.index',compact('products','categories'));
+        $products = Product::query();
+
+        if ($name){
+            $products->where('name', 'like', '%' . $name . '%');
+        }
+
+        if ($category_id) {
+            $products->where('category_id', $category_id);
+        }
+
+        if ($price) {
+            $products->orderBy('price', $price);
+        }
+
+        if ($sold) {
+            $products->orderBy('sold', $sold);
+        }
+
+        $products = $products->latest('updated_at')
+            ->paginate(10);
+        $categories = Category::select('id', 'name')->get();
+
+        return view('product.index', compact(
+            'category_id',
+            'categories',
+            'products',
+            'price',
+            'name',
+            'sold'
+        ));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,26 +72,38 @@ class ProductController extends Controller
     {
         try {
             $image_name = null;
+            $id_product = $request->input('id',null);
             DB::beginTransaction();
-            $product = new Product();
-            $product->name = $request->name;
 
             if ($request->hasFile('image')) {
                 $image_name = upload_file('product_images', $request->file('image'));
-                $product->image = $image_name;
+            } elseif ($id_product != null) {
+                $image_name = Product::where('id',$id_product)->value('image');
             }
 
-            $product->category_id = $request->category_id;
-            $product->price = $request->price;
-            $product->description = $request->description;
-            $product->status = $request->status;
-            $product->save();
+            Product::updateOrCreate(
+                ['id' => $id_product],
+                [
+                    'name' => $request->input('name', null),
+                    'image' => $image_name,
+                    'category_id' => $request->input('category_id', null),
+                    'price' => $request->input('price', null),
+                    'description' => $request->input('description', null),
+                    'status' => $request->input('status', null),
+                ]
+            );
+
             DB::commit();
 
-            return redirect()->route('product.index');
+            if ($id_product != null) {
+                return redirect()->back()->with('msg','Update product successfully!');
+            } else {
+                return redirect()->route('product.index')->with('mgs','Create product successfully!');
+            }
+
         } catch (\Throwable $throwable) {
             DB::rollBack();
-            echo $throwable;
+            return redirect()->back()->withErrors('Error saving product!');
         }
     }
 
@@ -70,9 +112,13 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::with('category')->findOrFail($id);
+        try {
+            $product = Product::with('category')->findOrFail($id);
 
-        return view('product.show',compact('product'));
+            return view('product.show',compact('product'));
+        } catch (\Exception $exception) {
+            return redirect()->route('dashboard')->withErrors('Data not found!');
+        }
     }
 
     /**
@@ -80,55 +126,36 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = Product::find($id);
-        $productName = $product->name;
-        $categories = Category::select('id','name')->get();
+        try {
+            $product = Product::findOrFail($id);
+            $categories = Category::select('id','name')->get();
 
-        return view('product.edit',compact('product','productName','categories'));
+            return view('product.edit',compact('product','categories'));
+        } catch (\Exception $exception) {
+            return redirect()->route('dashboard')->withErrors('Data not found!');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
-        try {
-            $image_name = null;
-            DB::beginTransaction();
-            $product = Product::find($id);
 
-            $product->name = $request->name;
-
-            if ($request->hasFile('image')) {
-                $oldImageProduct = $product->image;
-                delete_file($oldImageProduct);
-                $image_name = upload_file('product_images', $request->file('image'));
-                $product->image = $image_name;
-            } else {
-                $image_name = Product::where('id',$id)->value('image');
-            }
-
-            $product->category_id = $request->category_id;
-            $product->price = $request->price;
-            $product->description = $request->description;
-            $product->status = $request->status;
-            $product->save();
-            DB::commit();
-
-            return redirect()->route('product.index');
-        } catch (\Throwable $throwable) {
-            DB::rollBack();
-            echo $throwable;
-        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
-        return redirect()->route('product.index');
+        try {
+            $product->delete();
+
+            return redirect()->route('product.index')->with('msg','Delete product successfully!');
+        } catch (\Exception $exception) {
+            return redirect()->route('dashboard')->withErrors('Data not found!');
+        }
+
     }
 }

@@ -19,7 +19,10 @@ use App\Http\Controllers\OrderController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::get('/detail-product', function () {
+    return view('fe.products.show');
 });
 
 Route::get('/about', function () {
@@ -62,14 +65,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             });
 
             //Product
-            Route::group(['prefix' => 'product'], function () {
-               Route::get('/',[ProductController::class,'index'])->name('product.index');
-               Route::get('/add-product',[ProductController::class,'create'])->name('product.create');
-               Route::post('/add-product',[ProductController::class,'store'])->name('product.store');
-               Route::get('/show-product/{id}',[ProductController::class,'show'])->name('product.show');
-               Route::get('/update-product/{id}',[ProductController::class,'edit'])->name('product.edit');
-               Route::post('/update-product/{id}',[ProductController::class,'update'])->name('product.update');
-               Route::post('/delete-product/{id}',[ProductController::class,'destroy'])->name('product.destroy');
+            Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+               Route::get('/',[ProductController::class,'index'])->name('index');
+               Route::get('/add-product',[ProductController::class,'create'])->name('create');
+               Route::post('/add-product',[ProductController::class,'store'])->name('store');
+               Route::get('/show-product/{id}',[ProductController::class,'show'])->name('show');
+               Route::get('/update-product/{id}',[ProductController::class,'edit'])->name('edit');
+               Route::patch('/add-product',[ProductController::class,'store'])->name('update');
+               Route::delete('/delete-product/{product}',[ProductController::class,'destroy'])->name('destroy');
             });
             Route::group(['prefix' => 'categories'], function () {
                 Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
