@@ -36,7 +36,7 @@
     <li class="nav-item">
         <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('order.index') }}">
             <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-braille') }}"></use>
             </svg>
             {{ __('Order') }}
         </a>

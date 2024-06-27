@@ -14,7 +14,7 @@ class OrderService
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
             ->join('products', 'order_items.product_id', '=', 'products.id')
             ->select('orders.id', 'users.name as user_name', 'status.id as status_id', 'status.name as status_name', 'order_items.product_id',
-                'order_items.quatity', 'products.image', 'products.name as product_name', 'orders.created_at',
+                'order_items.quantity', 'products.image', 'products.name as product_name', 'orders.created_at',
                 'orders.updated_at');
 
 //        $request->input('product_name');
@@ -45,13 +45,13 @@ class OrderService
             ->where('orders.id', $id)
             ->select('orders.id', 'orders.user_id', 'orders.status_id', 'orders.created_at', 'orders.updated_at',
                 'users.name as user_name', 'status.name as status_name', 'order_items.product_id',
-                'order_items.quatity', 'products.image', 'products.name as product_name', 'products.price',
+                'order_items.quantity', 'products.image', 'products.name as product_name', 'products.price',
                 'products.sold', 'products.description', 'products.category_id',
                 'categories.name as category_name',
-                DB::raw('SUM(order_items.quatity * products.price) as total_amount'))
+                DB::raw('SUM(order_items.quantity * products.price) as total_amount'))
             ->groupBy('orders.id', 'orders.user_id', 'orders.status_id', 'orders.created_at', 'orders.updated_at',
                 'users.name', 'status.name', 'order_items.product_id',
-                'order_items.quatity', 'products.image', 'products.name', 'products.price',
+                'order_items.quantity', 'products.image', 'products.name', 'products.price',
                 'products.sold', 'products.description', 'products.category_id',
                 'categories.name')
             ->firstOrFail();

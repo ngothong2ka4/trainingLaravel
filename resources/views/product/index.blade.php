@@ -15,7 +15,7 @@
             <div class="card-body">
                 <h5 class="card-title">Products</h5>
                 <h6 class="card-subtitle mb-2 text-muted"> Manage your products here.</h6>
-                <form action="{{ route('product.index') }}" id="searchForm" method="GET" class="d-flex align-items-center">
+                <form action="{{ route('product.index') }}" id="searchForm" method="GET" class="d-flex align-items-center"  >
                     <div class="col-auto me-2">
                         <label>Name</label>
                         <input type="text" name="name" class="form-control" placeholder="Search by product name"
