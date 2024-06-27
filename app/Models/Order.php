@@ -11,6 +11,11 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'status_id',
-        'total_price',
+        'price',
     ];
+
+    public function orderItem()
+    {
+        return $this->hasMany(OrderItem::class,'order_id');
+    }
 }

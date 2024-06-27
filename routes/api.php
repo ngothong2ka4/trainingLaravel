@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ApiCreateOrderController;
 use App\Http\Controllers\API\ApiProductController;
 use App\Http\Controllers\API\Auth\AuthController;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ Route::group(['middleware' => ['token_auth']], function () {
 
 Route::get('/get-product', [ApiProductController::class, 'index']);
 Route::get('/get-product/{id}', [ApiProductController::class, 'show']);
+Route::post('/create-order', [ApiCreateOrderController::class, 'store']);
 
 
 
