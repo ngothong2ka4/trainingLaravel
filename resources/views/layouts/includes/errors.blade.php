@@ -4,7 +4,7 @@
     <button type="button" class="btn-close" data-coreui-dismiss="alert" aria-label="Close"></button>
     <ul>
         @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
+        <li>{{ var_dump($errors->all()) }}</li>
         @endforeach
     </ul>
 </div>

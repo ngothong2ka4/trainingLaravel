@@ -31,9 +31,7 @@ class StoreProductRequest extends FormRequest
                 Rule::unique('products', 'name')->ignore($id),
             ],
             'category_id' => 'required|exists:categories,id',
-            'price' => 'required|numeric|min:0',
-            'description' => 'required|string',
-            'status' => 'required',
+            'price' => 'required|numeric|min:0'
         ];
     }
 }
