@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ApiProductController;
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\UserAPI\ApiHomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;use App\Http\Controllers\Auth\LoginController;
 
@@ -25,6 +26,8 @@ Route::group(['middleware' => ['token_auth']], function () {
     });
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+
+Route::get('/', [ApiHomeController::class, 'index']);
 
 Route::get('/get-product', [ApiProductController::class, 'index']);
 Route::get('/get-product/{id}', [ApiProductController::class, 'show']);

@@ -12,13 +12,19 @@ Product list
             <h6 class="card-subtitle mb-2 text-muted"> Manage your products here.</h6>
             <form action="{{ route('product.index') }}" method="GET" class="d-flex align-items-center">
                 <div class="col-auto me-2">
-                    <input type="text" name="search" class="form-control" placeholder="Search by product name" value="{{ request()->get('search') }}">
+                    <input type="text" name="search" class="form-control form-control-sm" placeholder="Search by product name" value="{{ request()->get('search') }}">
                 </div>
-                @foreach($categories as $category)
-                    <option value="{{$category->id}}" selected>{{ $category->name }}</option>
-                @endforeach
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-outline-primary">Search</button>
+                <div class="col-3">
+                    <select name="" id="" class="form-control form-control-sm">
+                        @foreach($categories as $category)
+                        
+                            <option value="{{$category->id}}" selected>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+
+                </div>
+                <div class="col-auto ms-3">
+                    <button type="submit" class="btn btn-outline-primary btn-sm">Search</button>
                 </div>
             </form>
             <div class="mt-2">

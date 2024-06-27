@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashBoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         /**
          * Home Routes
          */
-        Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashBoardController::class, 'index'])->name('dashboard');
         /**
          * Role Routes
           */

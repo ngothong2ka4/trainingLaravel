@@ -12,4 +12,5 @@
 
 @section('content')
     @include('dashboard')
+    
 @endsection

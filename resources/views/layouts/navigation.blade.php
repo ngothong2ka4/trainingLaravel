@@ -22,7 +22,15 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>
             </svg>
-            {{ __('Categories') }}
+            {{ __('Product') }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('categories.index') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>
+            </svg>
+            {{ __('Category') }}
         </a>
     </li>
 

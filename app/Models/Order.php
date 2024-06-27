@@ -13,4 +13,13 @@ class Order extends Model
         'status_id',
         'total_price',
     ];
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
 }

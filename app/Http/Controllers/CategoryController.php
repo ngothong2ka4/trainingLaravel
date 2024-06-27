@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $category->save();
 
         // Redirect back to index page with success message
-        return redirect()->route('categories.index')->with('success', 'Category created successfully.');;
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
 
