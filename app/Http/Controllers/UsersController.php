@@ -123,8 +123,7 @@ class UsersController extends Controller
         $user->update($request->validated());
 
 
-        return redirect()->route('users.index')
-            ->withSuccess(__('User updated successfully.'));
+        return redirect()->route('categories.index')->with('success', 'User created successfully.');
     }
 
     /**
@@ -138,7 +137,6 @@ class UsersController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('users.index')
-            ->withSuccess(__('User deleted successfully.'));
+        return redirect()->route('users.index')->with('success', 'User Delete successfully.');
     }
 }

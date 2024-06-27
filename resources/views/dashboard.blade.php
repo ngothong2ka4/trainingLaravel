@@ -1,71 +1,28 @@
 <div class="row">
-    <div class="col-sm-6 col-lg-3">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="fs-4 fw-semibold">89.9%</div>
-                <div>Widget title</div>
-                <div class="progress progress-thin my-2">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-medium-emphasis">Widget helper text</small>
+    @foreach ($data as $item)
+        <div class="col-sm-6 col-lg-3">
+            <div class="card mb-4 text-white {!! $item['bg-color'] !!}">
+                <div class="card-body">
+                    <small class="text-medium-emphasis-inverse">{{ $item['title'] }}</small>
+                    <div class="fs-4 fw-semibold">{{ $item['count'] }} {{ $item['name'] }}</div>
+                    <div></div>
+                    <div class="progress progress-white progress-thin my-2">
+                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- /.col-->
-    <div class="col-sm-6 col-lg-3">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="fs-4 fw-semibold">12.124</div>
-                <div>Widget title</div>
-                <div class="progress progress-thin my-2">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-medium-emphasis">Widget helper text</small>
-            </div>
-        </div>
-    </div>
-    <!-- /.col-->
-    <div class="col-sm-6 col-lg-3">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="fs-4 fw-semibold">$98.111,00</div>
-                <div>Widget title</div>
-                <div class="progress progress-thin my-2">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-medium-emphasis">Widget helper text</small>
-            </div>
-        </div>
-    </div>
-    <!-- /.col-->
-    <div class="col-sm-6 col-lg-3">
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="fs-4 fw-semibold">2 TB</div>
-                <div>Widget title</div>
-                <div class="progress progress-thin my-2">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-medium-emphasis">Widget helper text</small>
-            </div>
-        </div>
-    </div>
+        
+    @endforeach
     <!-- /.col-->
 </div>
 <!-- /.row-->
 
 
 
-<div class="row">
-    <div class="col-sm-6 col-lg-3">
-        <div class="card mb-4 text-white bg-primary">
-            <div class="card-body">
-                <div class="fs-4 fw-semibold">89.9%</div>
-                <div>Widget title</div>
-                <div class="progress progress-white progress-thin my-2">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-medium-emphasis-inverse">Widget helper text</small>
-            </div>
-        </div>
-    </div>
+
     <!-- /.col-->
-    <div class="col-sm-6 col-lg-3">
+    {{-- <div class="col-sm-6 col-lg-3">
         <div class="card mb-4 text-white bg-warning">
             <div class="card-body">
                 <div class="fs-4 fw-semibold">12.124</div>
@@ -87,25 +44,16 @@
                 </div><small class="text-medium-emphasis-inverse">Widget helper text</small>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- /.col-->
-    <div class="col-sm-6 col-lg-3">
-        <div class="card mb-4 text-white bg-info">
-            <div class="card-body">
-                <div class="fs-4 fw-semibold">2 TB</div>
-                <div>Widget title</div>
-                <div class="progress progress-white progress-thin my-2">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><small class="text-medium-emphasis-inverse">Widget helper text</small>
-            </div>
-        </div>
-    </div>
+    
+    
     <!-- /.col-->
-</div>
+{{-- </div> --}}
 <!-- /.row-->
 
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-6 col-lg-3">
         <div class="card mb-4">
             <div class="card-body p-3 d-flex align-items-center">
@@ -198,5 +146,5 @@
         </div>
     </div>
     <!-- /.col-->
-</div>
+</div> --}}
 <!-- /.row-->
