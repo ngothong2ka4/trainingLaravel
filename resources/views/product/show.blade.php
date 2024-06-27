@@ -12,12 +12,12 @@
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="{{ asset($product->image) }}" class="img-fluid rounded-start" alt="...">
+                        <img src="{{ asset($product->image) }}" class="img-fluid rounded-start" alt="..." style="width: 100%;height: 100%;">
 
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <h3 class="card-title">{{ $product->name }}</h3>
                             <p class="card-text">Price: {{ $product->price }} $</p>
                             <p class="card-text">Category: {{ $product->category->name }}</p>
                             <p class="card-text">Status: {{ $product->status == 1 ? 'Active' : 'Inactive' }}</p>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="justify-content-between my-3 mx-3">
-            <a href="{{ route('product.index') }}" class="btn btn-success">Back</a>
+            <a href="{{ route('product.index') }}" class="btn btn-success text-light">Back</a>
         </div>
     </div>
 @endsection

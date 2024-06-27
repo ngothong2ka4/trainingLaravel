@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('title', 'Categories List')
-
+@push('before-styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.css">
+@endpush
 @section('content')
     <div class="bg-light rounded">
         <div class="card">

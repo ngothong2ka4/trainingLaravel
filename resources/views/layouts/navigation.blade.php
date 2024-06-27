@@ -18,6 +18,15 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('categories.index') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>
+            </svg>
+            {{ __('Categories') }}
+        </a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('product.index') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -53,7 +55,18 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
+//        try {
+//            $category = Category::findOrFail($id);
+//            dd($category);
+//            return view('categories.edit', compact('category'));
+//        } catch (ModelNotFoundException $exception) {
+//            return redirect()->back()->withErrors($exception->getMessage());
+//        }
+////        $category = Category::find($id);
+        $category = Category::where('id', $id)->first(); // ->find($id)
+        if (empty($category)) {
+            return redirect()->back()->withErrors('error');
+        }
         return view('categories.edit', compact('category'));
     }
 

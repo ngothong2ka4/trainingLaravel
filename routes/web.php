@@ -18,7 +18,10 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::get('/detail-product', function () {
+    return view('fe.products.show');
 });
 
 Route::get('/about', function () {
@@ -61,27 +64,27 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             });
 
             //Product
-            Route::group(['prefix' => 'product'], function () {
-               Route::get('/',[ProductController::class,'index'])->name('product.index');
-               Route::get('/add-product',[ProductController::class,'create'])->name('product.create');
-               Route::post('/add-product',[ProductController::class,'store'])->name('product.store');
-               Route::get('/show-product/{id}',[ProductController::class,'show'])->name('product.show');
-               Route::get('/update-product/{id}',[ProductController::class,'edit'])->name('product.edit');
-               Route::post('/update-product/{id}',[ProductController::class,'update'])->name('product.update');
-               Route::post('/delete-product/{id}',[ProductController::class,'destroy'])->name('product.destroy');
+            Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+               Route::get('/',[ProductController::class,'index'])->name('index');
+               Route::get('/add-product',[ProductController::class,'create'])->name('create');
+               Route::post('/add-product',[ProductController::class,'store'])->name('store');
+               Route::get('/show-product/{id}',[ProductController::class,'show'])->name('show');
+               Route::get('/update-product/{id}',[ProductController::class,'edit'])->name('edit');
+               Route::patch('/add-product',[ProductController::class,'store'])->name('update');
+               Route::delete('/delete-product/{product}',[ProductController::class,'destroy'])->name('destroy');
+            });
+
+            //Category
+            Route::group(['middleware' => 'auth'], function () {
+                Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+                Route::get('categories/create', [CategoryController::class, 'create'])->name('categories.create');
+                Route::post('categories/store', [CategoryController::class, 'store'])->name('categories.store');
+//            Route::get('categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+                Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+                Route::put('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+                Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
             });
         });
-        Route::group(['middleware' => 'auth'], function () {
-            Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
-            Route::get('categories/create', [CategoryController::class, 'create'])->name('categories.create');
-            Route::post('categories/store', [CategoryController::class, 'store'])->name('categories.store');
-//            Route::get('categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
-            Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-            Route::put('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
-            Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-        });
-
-
 
     });
     Route::group(['prefix' => 'fe'], function() {

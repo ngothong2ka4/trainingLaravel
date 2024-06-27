@@ -40,7 +40,7 @@
         <div class="body flex-grow-1 px-3">
             <div class="container-lg">
                 <!-- Errors block -->
-                @include('layouts.includes.errors')
+{{--                @include('layouts.includes.errors')--}}
                 <!-- / Errors block -->
                 <div class="mb-4">@yield('content')</div>
             </div>
