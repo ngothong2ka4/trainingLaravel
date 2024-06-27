@@ -76,7 +76,7 @@
                     </tr>
                     @foreach ($products as $key => $product)
                         <tr>
-                            <td>{{ $product->id }}</td>
+                            <td>{{ $loop->iteration + $products->perPage() * ($products->currentPage() - 1) }}</td>
                             <td><img src="{{ asset($product->image) }}" style="width: 100px;height: 100px;"></td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->category?->name }}</td>
