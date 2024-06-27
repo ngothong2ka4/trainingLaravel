@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\Category;
 
 class CategoryUpdateRequest extends FormRequest
 {
@@ -14,14 +15,14 @@ class CategoryUpdateRequest extends FormRequest
 
     public function rules(): array
     {
-        $id = $this->segment(2); // Lấy id từ URL segment
+        $id = $this->segment(3); // Lấy id từ URL segment
 
         return [
             'name' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('categories')->ignore($id),
+                Rule::unique('categories')->ignore($id)->whereNull('deleted_at'), // Ignore soft deleted records
             ],
         ];
     }

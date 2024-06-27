@@ -2,6 +2,11 @@
 
 @section('title', 'Categories List')
 
+@push('before-styles')
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+@endpush
+
 @section('content')
     <div class="bg-light rounded">
         <div class="card">
@@ -30,7 +35,7 @@
                         <th scope="col">Created by</th>
                         <th scope="col">Created at</th>
                         <th scope="col">Updated at</th>
-                        <th scope="col" colspan="3" width="1%"></th>
+                        <th scope="col" colspan="3" width="1%">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,11 +46,22 @@
                             <td>{{ $category->created_by }}</td>
                             <td>{{ $category->created_at->format('Y/m/d H:i') }}</td>
                             <td>{{ $category->updated_at->format('Y/m/d H:i') }}</td>
-                            <td style="display: flex; gap: 10px;">
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm">Edit</a>
 
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category->id], 'style' => 'display:inline']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                            <td>
+                                <a class="btn btn-info btn-sm" href="{{ route('categories.show', $category->id) }}">
+                                    <i class="fas fa-eye" style="color: #fff;"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="{{ route('categories.edit', $category->id) }}">
+                                    <i class="fas fa-pencil-alt" style="color: #fff;"></i>
+                                </a>
+                            </td>
+                            <td>
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category->id], 'style' => 'display:inline', 'id' => 'delete-form-' . $category->id]) !!}
+                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $category->id }})">
+                                    <i class="fas fa-trash-alt" style="color: #fff;"></i>
+                                </button>
                                 {!! Form::close() !!}
                             </td>
                         </tr>
@@ -59,3 +75,23 @@
         </div>
     </div>
 @endsection
+@push('before-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function confirmDelete(categoryId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + categoryId).submit();
+                }
+            })
+        }
+    </script>
+@endpush

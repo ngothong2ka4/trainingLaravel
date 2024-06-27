@@ -4,7 +4,7 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
             </svg>
-            {{ __('Dashboard') }}
+            {{ __('Dshboard') }}
         </a>
     </li>
 
@@ -22,7 +22,23 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>
             </svg>
+            {{ __('Product') }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('categories.index') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-folder') }}"></use>
+            </svg>
             {{ __('Categories') }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ request()->is('roles*') ? 'active' : ''}}" href="{{ route('order.index') }}">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-pool') }}"></use>
+            </svg>
+            {{ __('Order') }}
         </a>
     </li>
 

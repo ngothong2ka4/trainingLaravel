@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,15 +71,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
                Route::post('/update-product/{id}',[ProductController::class,'update'])->name('product.update');
                Route::post('/delete-product/{id}',[ProductController::class,'destroy'])->name('product.destroy');
             });
-        });
-        Route::group(['middleware' => 'auth'], function () {
-            Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
-            Route::get('categories/create', [CategoryController::class, 'create'])->name('categories.create');
-            Route::post('categories/store', [CategoryController::class, 'store'])->name('categories.store');
-//            Route::get('categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
-            Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-            Route::put('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
-            Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+            Route::group(['prefix' => 'categories'], function () {
+                Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+                Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
+                Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
+                Route::get('/{id}', [CategoryController::class, 'show'])->name('categories.show');
+                Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+                Route::put('/{id}', [CategoryController::class, 'update'])->name('categories.update');
+                Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+            });
+            Route::group(['prefix' => 'order'], function () {
+                Route::get('/', [OrderController::class, 'index'])->name('order.index');
+                Route::get('/{id}', [OrderController::class, 'show'])->name('order.show');
+                Route::get('/orders/{id}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
+                Route::get('/orders/{id}/done', [OrderController::class, 'done'])->name('order.done');
+            });
         });
 
 

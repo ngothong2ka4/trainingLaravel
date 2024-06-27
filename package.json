@@ -16,9 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "toastr": "^2.1.4"
-    },
-    "dependencies": {
-        "@coreui/icons": "^3.0.1"
+        "@coreui/icons": "^3.0.1",
+        "bootstrap-datepicker": "^1.10.0"
     }
 }
