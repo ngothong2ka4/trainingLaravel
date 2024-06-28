@@ -15,8 +15,7 @@
                                     <div class="image-slides owl-carousel owl-theme" data-slider-id="1">
                                         <div class="item">
                                             <div class="top-img">
-                                                <img src="{{ asset( $product->image ) }}" alt="Product"
-                                                     style="border-radius: 10px;">
+                                                <img src="{{ asset( $product->image ) }}" alt="Product" style="border-radius: 10px;">
                                             </div>
                                         </div>
                                     </div>
@@ -43,8 +42,7 @@
                                         <ul class="number">
                                             <li>
                                                 <span class="minus">-</span>
-                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                <input type="text" name="quantity" value="1"/>
+                                                <input type="text" name="quantity" id="quantity" value="1" />
                                                 <span class="plus">+</span>
                                             </li>
                                         </ul>
@@ -56,6 +54,7 @@
                                             <img src="{{ asset('fe/assets/images/shape2.png') }}" alt="Shape">
                                         </button>
                                     </li>
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 </form>
                             </ul>
                         </div>
@@ -65,14 +64,12 @@
             <div class="bottom">
                 <ul class="nav nav-pills" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home"
-                           role="tab" aria-controls="pills-home" aria-selected="true">Description</a>
+                        <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Description</a>
                     </li>
                     <li class="nav-item" role="presentation">
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                         aria-labelledby="pills-home-tab">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="bottom-description">
                             <p>{{ $product->description }}</p>
                         </div>
@@ -96,8 +93,7 @@
                                 <a class="wishlist" href="#">
                                     <i class="bx bx-heart"></i>
                                 </a>
-                                <img src="{{ asset( $related_product->image ) }}" alt="Products"
-                                     style="border-radius: 10px">
+                                <img src="{{ asset( $related_product->image ) }}" alt="Products" style="border-radius: 10px">
                                 <div class="inner">
                                     <h3>
                                         <a href="">{{ $related_product->name }}</a>
@@ -154,7 +150,7 @@
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + localStorage.getItem('token') // Thêm JWT token nếu cần
+                        'Authorization': 'Bearer ' + token
                     },
                     body: JSON.stringify(orderData)
                 })
@@ -197,13 +193,13 @@
             minusButton.addEventListener('click', function () {
                 let quantity = parseInt(quantityInput.value);
                 if (quantity > 1) {
-                    quantityInput.value = quantity - 1;
+                    quantityInput.value = quantity;
                 }
             });
 
             plusButton.addEventListener('click', function () {
                 let quantity = parseInt(quantityInput.value);
-                quantityInput.value = quantity + 1;
+                quantityInput.value = quantity;
             });
         });
     </script>
