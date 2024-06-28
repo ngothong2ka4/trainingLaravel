@@ -22,10 +22,10 @@ use App\Http\Controllers\Auth\Client\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('homePage');
-
+//Route::get('/', function () {
+//    return view('index');
+//})->name('homePage');
+Route::get('/', [HomeController::class,'index'])->name('homePage');
 Route::get('/404', function () {
     return view('fe.404');
 })->name('page404');
@@ -91,7 +91,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     });
 });
 
-Route::get('/detail-product/{id}',[PageDetailProductController::class, 'show']);
+Route::get('/detail-product/{id}',[PageDetailProductController::class, 'show'])->name('detail-product');
 
 Route::fallback(function() {
     return redirect()->route('page404');

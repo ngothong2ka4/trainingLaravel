@@ -156,7 +156,8 @@ button:focus {
 }
 
 .common-btn:hover {
-    color: #fff;
+    color: #8294c9;
+    background: #4b4c4f;
 }
 
 .common-btn:hover img {
