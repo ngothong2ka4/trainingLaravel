@@ -24,24 +24,24 @@ User List
                     <div class="row">
                     <div class="mb-3 col-3">
                         <label for="name_email" class="form-label ">Name / Email</label>
-                        <input  type="text" class="form-control form-control-sm" name="name_email" placeholder="Search Name Or Email" value="{{ request('name_email') }}">
+                        <input  type="text" class="form-control" name="name_email" placeholder="Search Name Or Email" value="{{ request('name_email') }}">
                     </div>
                     <div class="mb-3 col-3">
                         <label for="name" class="form-label">Type</label>
-                        <select name="type" id="" class="form-control form-control-sm">
+                        <select name="type" id="" class="form-control">
                             <option value="" disabled selected>Choose type</option>
                             <option value="1" {{ request('type') == '1' ? 'selected' : '' }}>Admin</option>
                             <option value="2" {{ request('type') == '2' ? 'selected' : '' }}>User</option>
                         </select>
                     </div>
                     <div class="mb-3 col-3 ">
-                        <input type="submit" class=" btn btn-outline-primary btn-sm" style="margin-top:30px" value="Search">
-                        <input type="button" id="resetBtn" class="btn btn-outline-danger btn-sm" style="margin-top:30px" value="Reset">
+                        <input type="submit" class=" btn btn-outline-primary " style="margin-top:30px" value="Search">
+                        <input type="button" id="resetBtn" class="btn btn-outline-danger" style="margin-top:30px" value="Reset">
                     </div>
                 </div>
             </form>
             <div class="mb-2 text-end">
-                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right">Add User</a>
+                <a href="{{ route('users.create') }}" class="btn btn-primary float-right">Add User</a>
             </div>
 
             <table class="table table-striped">

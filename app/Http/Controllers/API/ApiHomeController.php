@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class ApiHomeController extends Controller
 {
     use ApiResponse;
-
+    
     public function index(Request $request)
     {
         $productQuery = Product::with('category');

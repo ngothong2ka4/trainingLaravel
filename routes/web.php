@@ -45,7 +45,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::group(['prefix' => 'cms'], function() {
         Auth::routes(['verify' => false]);
 
-            Route::middleware(['auth','isAdmin'])->group(function () {
+            Route::middleware(['auth'])->group(function () {
 
                 Route::get('/dashboard', [DashBoardController::class, 'index'])->name('dashboard');
                 //User
