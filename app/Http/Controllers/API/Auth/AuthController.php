@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ApiLoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class AuthController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['login']]);
     }
-    public function login(Request $request)
+    public function login(ApiLoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
         $token = Auth('api')->attempt($credentials);
@@ -35,7 +36,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth('api')->logout();
         return $this->success([],'Successfully Logout!',200);
     }
 
