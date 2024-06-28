@@ -61,7 +61,7 @@
                     <tbody>
                     @foreach($orderDetails as $key => $order)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $loop->iteration + $orderDetails->perPage() * ($orderDetails->currentPage() - 1) }}</td>
                             <td><img src="{{ asset($order->image) }}" alt="" style="max-width: 100px;"></td>
                             <td>{{ $order->product_name }}</td>
                             <td>{{ $order->user_name }}</td>
@@ -88,6 +88,11 @@
                     @endforeach
                     </tbody>
                 </table>
+
+                <div class="d-flex">
+                    {!! $orderDetails->links() !!}
+                </div>
+
             </div>
         </div>
     </div>

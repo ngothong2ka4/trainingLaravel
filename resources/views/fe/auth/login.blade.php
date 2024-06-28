@@ -13,9 +13,11 @@
                     <h2>Login</h2>
                     <div class="form-group">
                         <input type="email" name="email" class="form-control" placeholder="Your Email">
+                        <div class="invalid-feedback" id="email-error"></div>
                     </div>
                     <div class="form-group">
                         <input type="password" name="password" class="form-control" placeholder="Password">
+                        <div class="invalid-feedback" id="password-error"></div>
                     </div>
                     <button type="submit" class="btn common-btn">
                         Login
@@ -37,15 +39,6 @@
                             </a>
                         </li>
                     </ul>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                 </form>
             </div>
         </div>
@@ -54,11 +47,36 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.querySelector('#login-form');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+
             form.addEventListener('submit', function (event) {
                 event.preventDefault(); // Ngăn form submit mặc định
 
-                const email = form.querySelector('input[name="email"]').value;
-                const password = form.querySelector('input[name="password"]').value;
+                const email = form.querySelector('input[name="email"]').value.trim();
+                const password = form.querySelector('input[name="password"]').value.trim();
+
+                // Reset lỗi
+                emailError.textContent = '';
+                passwordError.textContent = '';
+
+                let hasError = false;
+
+                // Kiểm tra email
+                if (!email) {
+                    emailError.textContent = 'Email không được để trống.';
+                    hasError = true;
+                }
+
+                // Kiểm tra password
+                if (!password) {
+                    passwordError.textContent = 'Mật khẩu không được để trống.';
+                    hasError = true;
+                }
+
+                if (hasError) {
+                    return;
+                }
 
                 fetch('http://127.0.0.1:8000/api/login', {
                     method: 'POST',

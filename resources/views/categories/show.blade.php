@@ -6,7 +6,7 @@
     <div class="bg-light rounded">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Category Details</h5>
+                <h5 class="card-title">Show Categories {{ $category->name }}</h5>
 
                 <div class="container mt-4">
                     <div>

@@ -30,7 +30,8 @@ class OrderService
         if ($request->has('from_date') && $request->has('to_date') && $request->from_date != '' && $request->to_date != '') {
             $query->whereBetween('orders.created_at', [$request->from_date, $request->to_date]);
         }
-        $orderDetails = $query->get();
+        $orderDetails = $query->latest('updated_at')
+            ->paginate(5);;
 
         return $orderDetails;
     }

@@ -7,7 +7,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Show product {{ $product->name }}</h5>
+            <h5 class="card-title">Show Product {{ $product->name }}</h5>
             <h6 class="card-subtitle mb-2 text-muted"> Detail product {{ $product->name }}.</h6>
             <div class="card mb-3" style="max-width: 100%;">
                 <div class="row g-0">

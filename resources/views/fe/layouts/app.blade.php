@@ -143,7 +143,6 @@
     const userData = JSON.parse(localStorage.getItem('user'));
 
     if (token) {
-        // alert(123);
         document.getElementById('myLoginLinkLi').style.display = 'none';
         const userData = JSON.parse(localStorage.getItem('user'));
         const userName = userData.name;

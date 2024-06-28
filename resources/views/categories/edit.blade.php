@@ -6,7 +6,7 @@
     <div class="bg-light rounded">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Edit Category</h5>
+                <h5 class="card-title">{{ $category->name }} Info</h5>
 
                 <div class="container mt-4">
                     <form method="POST" action="{{ route('categories.update', $category->id) }}">

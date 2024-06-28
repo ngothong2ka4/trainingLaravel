@@ -74,8 +74,8 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-center">
-                    {{ $categories->appends(request()->input())->links() }}
+                <div class="d-flex">
+                    {!! $categories->links() !!}
                 </div>
             </div>
         </div>

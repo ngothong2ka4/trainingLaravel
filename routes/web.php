@@ -29,6 +29,9 @@ Route::get('/', [HomeController::class,'index'])->name('homePage');
 Route::get('/404', function () {
     return view('fe.404');
 })->name('page404');
+Route::get('/listorder', function () {
+    return view('fe.listorder.listOrder');
+});
 
 Route::get('/about', function () {
     return view('about');
