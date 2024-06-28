@@ -97,7 +97,7 @@ class ProductController extends Controller
 
             return $id_product != null ?
                 redirect()->route('product.index')->with('msg','Update product successfully!') :
-                redirect()->route('product.index')->with('mgs','Create product successfully!');
+                redirect()->route('product.index')->with('msg','Create product successfully!');
 
         } catch (\Throwable $throwable) {
             DB::rollBack();

@@ -23,7 +23,7 @@ class AuthController extends Controller
             return $this->error('Unauthorized',401,[]);
         }
 
-        $user = Auth::user();
+        $user = Auth('api')->user();
 
         return $this->success([
             'user' => $user,
