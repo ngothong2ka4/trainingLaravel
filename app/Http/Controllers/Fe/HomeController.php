@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -32,5 +33,22 @@ class HomeController extends Controller
         
         $categories = Category::all();
         return view('index',compact('products','categories'));
+
+
+        // Gọi API từ một URL bên ngoài
+        // $response = Http::get('http://127.0.0.1:8000/');
+
+        // // Kiểm tra xem request có thành công hay không
+        // if ($response->successful()) {
+        //     // Lấy dữ liệu từ phản hồi JSON
+        //     $data = $response->json();
+        //     dd($data);
+
+        //     // Xử lý dữ liệu ở đây, ví dụ:
+        //     return view('index', ['data' => $data]);
+        // } else {
+        //     // Xử lý khi gọi API không thành công
+        //     return redirect()->back()->withErrors('Failed to fetch data from API.');
+        // }
     }
 }

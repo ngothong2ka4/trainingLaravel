@@ -35,7 +35,8 @@ User List
                         </select>
                     </div>
                     <div class="mb-3 col-3 ">
-                        <input type="submit" class=" btn btn-primary btn-sm" style="margin-top:30px" value="Search">
+                        <input type="submit" class=" btn btn-outline-primary btn-sm" style="margin-top:30px" value="Search">
+                        <input type="button" id="resetBtn" class="btn btn-outline-danger btn-sm" style="margin-top:30px" value="Reset">
                     </div>
                 </div>
             </form>
@@ -126,5 +127,17 @@ User List
                 confirmButtonText: 'OK'
             });
         @endif
+    </script>
+@endpush
+@push('after-scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#resetBtn').click(function(event) {
+                event.preventDefault()
+                // Clear all input and select fields
+                $('#searchForm').find('input[type="text"], select').val('');
+                window.location.replace(location.origin + location.pathname)
+            });
+        });
     </script>
 @endpush

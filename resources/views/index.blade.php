@@ -34,7 +34,9 @@
                 </div>
                 <div class="col-lg-9">
                     <div id="Container" class="row justify-content-center">
-
+                        @php
+                            // dd($data);
+                        @endphp
                         @foreach ($products as $item)
                             <div class="col-sm-6 col-lg-4 mix armchair center-table">
                                 <div class="products-item">

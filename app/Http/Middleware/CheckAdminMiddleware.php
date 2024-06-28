@@ -19,7 +19,8 @@ class CheckAdminMiddleware
         if (Auth::check() && Auth::user()->isAdmin()) {
             return $next($request);
         }
-    
-        abort(403);
+        $request->session()->invalidate();
+        redirect()->route('cms.login')->with('error', 'You are not authorized to access this page.');
+        // abort(403);
     }
 }
