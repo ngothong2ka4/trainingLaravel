@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "caed8f6c65bcdce10913189b51cd7e37",
+    "content-hash": "ac6c46bf1b2ff45fe5466a61a38f65bd",
     "packages": [
         {
             "name": "brick/math",
@@ -3014,7 +3014,6 @@
                 "rtl",
                 "sweetalert",
                 "symfony",
-                "toastr",
                 "user-experience",
                 "user-feedback",
                 "yoeunes"
