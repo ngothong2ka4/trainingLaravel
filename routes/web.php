@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DashBoardController;
-
+use App\Http\Controllers\Auth\Client\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,36 +25,28 @@ Route::get('/', function () {
 Route::get('/detail-product', function () {
     return view('fe.products.show');
 });
-
+Route::get('/login', function () {
+    return view('fe.auth.login');
+});
 Route::get('/about', function () {
     return view('about');
 });
-
+Route::get('/login', function () {
+    return view('fe.auth.login');
+});
 /**
  * Auth Routes
  */
+Route::group(['prefix' => 'cms'], function() {
 Auth::routes(['verify' => false]);
 
+});
 
 Route::group(['namespace' => 'App\Http\Controllers'], function()
 {
     Route::middleware('auth')->group(function () {
-        /**
-         * Home Routes
-         */
-        Route::get('/dashboard', [DashBoardController::class, 'index'])->name('dashboard');
-        /**
-         * Role Routes
-          */
-        // Route::resource('roles', RolesController::class);
-        // /**
-        //  * Permission Routes
-        //  */
-        // Route::resource('permissions', PermissionsController::class);
-        /**
-         * User Routes
-         */
         Route::group(['prefix' => 'cms'], function() {
+            Route::get('/dashboard', [DashBoardController::class, 'index'])->name('dashboard');
             Route::group(['prefix' => 'users'], function () {
                 Route::get('/', [App\Http\Controllers\UsersController::class, 'index'])->name('users.index');
                 Route::get('/create', 'UsersController@create')->name('users.create');
@@ -91,9 +83,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
                 Route::get('/orders/{id}/done', [OrderController::class, 'done'])->name('order.done');
             });
         });
-
-
-
     });
     Route::group(['prefix' => 'fe'], function() {
 
