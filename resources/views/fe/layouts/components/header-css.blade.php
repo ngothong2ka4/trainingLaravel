@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{{ asset('fe/assets/css/modal-video.min.css') }}">
 <link rel="stylesheet" href="{{ asset('fe/assets/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('fe/assets/css/responsive.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
 
 <title>Training | Laravel</title>
 <link rel="icon" type="image/png" href="{{ asset('fe/assets/images/favicon.png') }}">

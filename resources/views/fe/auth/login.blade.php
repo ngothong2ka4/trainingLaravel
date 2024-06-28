@@ -60,7 +60,7 @@
                 const email = form.querySelector('input[name="email"]').value;
                 const password = form.querySelector('input[name="password"]').value;
 
-                fetch('http://127.0.0.1:8000/api/login', {
+                fetch('http://traininglaravel.test/api/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

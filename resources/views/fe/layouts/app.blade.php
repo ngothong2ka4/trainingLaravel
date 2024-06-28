@@ -451,7 +451,6 @@
             </div>
             <div class="modal-footer">
                 <form>
-                    <input type="text" class="form-control" placeholder="Enter Coupon Code">
                     <button type="submit" class="btn common-btn">
                         Proceed To Checkout
                         <img src="{{ asset('fe/assets/images/shape1.png') }}" alt="Shape">
@@ -466,7 +465,7 @@
 
 <div class="modal fade modal-right popup-modal wishlist-modal" id="exampleModalWishlist" tabindex="-1"
      aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="margin-right: 15px;">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Wishlist <span>02 Items</span></h2>
