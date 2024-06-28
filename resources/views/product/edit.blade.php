@@ -6,7 +6,6 @@
 
 @push('before-styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -67,16 +66,3 @@
             </div>
         </div>
         @endsection
-        @push('before-scripts')
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
-            <script>
-                @if(session('msg'))
-                Swal.fire({
-                    title: 'Success!',
-                    text: '{{ session('msg') }}',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-                @endif
-            </script>
-    @endpush

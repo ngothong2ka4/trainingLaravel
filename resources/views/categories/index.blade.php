@@ -10,22 +10,25 @@
 @push('before-styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.css">
 @endpush
+
 @section('content')
     <div class="bg-light rounded">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Categories</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Manage your categories here.</h6>
-                <div class="text-end mb-3">
-                    <form action="{{ route('categories.index') }}" method="GET" class="d-flex align-items-center">
+                    <form action="{{ route('categories.index') }}" method="GET" id="searchForm" class="d-flex align-items-center">
                         <div class="col-auto me-2">
+                            <label>Category</label>
                             <input type="text" name="search" class="form-control" placeholder="Search by category name" value="{{ request()->get('search') }}">
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto mt-4">
                             <button type="submit" class="btn btn-outline-primary">Search</button>
                         </div>
+                        <div class="col-auto mt-4 mx-2">
+                            <button type="button" id="resetBtn" class="btn btn-outline-danger">Reset</button>
+                        </div>
                     </form>
-                </div>
                 <div class="text-end">
                     <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm float-right">Add categories</a>
                 </div>
@@ -78,6 +81,7 @@
         </div>
     </div>
 @endsection
+
 @push('before-scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
@@ -96,5 +100,33 @@
                 }
             })
         }
+
+        @if(session('msg'))
+        Swal.fire({
+            title: 'Success!',
+            text: '{{ session('msg') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+        @endif
+        @if(session('error'))
+        Swal.fire({
+            title: 'Error!',
+            text: '{{ session('error') }}',
+            icon: 'error',
+            confirmButtonText: 'OK
+        @endif
+    </script>
+@endpush
+@push('after-scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#resetBtn').click(function(event) {
+                event.preventDefault()
+                // Clear all input and select fields
+                $('#searchForm').find('input[type="text"], select').val('');
+                window.location.replace(location.origin + location.pathname)
+            });
+        });
     </script>
 @endpush

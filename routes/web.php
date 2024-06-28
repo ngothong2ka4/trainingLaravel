@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\Fe\HomeController;
 
+use App\Http\Controllers\Auth\Client\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,11 +25,15 @@ Route::get('/', [HomeController::class,'index']);
 Route::get('/detail-product', function () {
     return view('fe.products.show');
 });
-
+Route::get('/login', function () {
+    return view('fe.auth.login');
+});
 Route::get('/about', function () {
     return view('about');
 });
-
+Route::get('/login', function () {
+    return view('fe.auth.login');
+});
 /**
  * Auth Routes
  */
@@ -78,9 +83,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
                     Route::get('/orders/{id}/done', [OrderController::class, 'done'])->name('order.done');
                 });
         });
-
-
-
     });
     Route::group(['prefix' => 'fe'], function() {
 

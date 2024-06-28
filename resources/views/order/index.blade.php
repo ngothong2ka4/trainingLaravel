@@ -5,6 +5,7 @@
 @push('before-styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -13,12 +14,13 @@
             <div class="card-body">
                 <h5 class="card-title">Orders</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Manage your orders here.</h6>
-                <div class="text-end mb-3">
-                    <form id="searchForm" action="{{ route('order.index') }}" method="GET" class="d-flex align-items-center">
+                <form id="searchForm" action="{{ route('order.index') }}" method="GET" class="d-flex align-items-center">
                         <div class="col-auto me-2">
+                            <label>Product Name</label>
                             <input type="text" name="product_name" class="form-control" placeholder="Search by product name" value="{{ request()->get('product_name') }}">
                         </div>
                         <div class="col-auto me-2">
+                            <label>Status</label>
                             <select name="status" class="form-control">
                                 <option value="">Select status</option>
                                 <option value="1" {{ request()->get('status') == '1' ? 'selected' : '' }}>New</option>
@@ -28,19 +30,20 @@
                             </select>
                         </div>
                         <div class="col-auto me-2">
-                            <input type="text" name="from_date" id="from_date" class="form-control" value="{{ request()->get('from_date') }}" placeholder="Từ ngày: ">
+                            <label>Start date</label>
+                            <input type="text" name="from_date" id="from_date" class="form-control" value="{{ request()->get('from_date') }}" placeholder="Search start date">
                         </div>
                         <div class="col-auto me-2">
-                            <input type="text" name="to_date" id="to_date" class="form-control" value="{{ request()->get('to_date') }}" placeholder="Đến ngày: ">
+                            <label>End date</label>
+                            <input type="text" name="to_date" id="to_date" class="form-control" value="{{ request()->get('to_date') }}" placeholder="Search for end date">
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto mt-4 me-2">
                             <button type="submit" class="btn btn-outline-primary">Search</button>
                         </div>
-    {{--                        <div class="col-auto">--}}
-    {{--                            <button type="button" id="resetButton" class="btn btn-outline-primary">Reset</button>--}}
-    {{--                        </div>--}}
+                        <div class="col-auto mt-4 me-2">
+                            <button type="button" id="resetBtn" class="btn btn-outline-danger">Reset</button>
+                        </div>
                     </form>
-                </div>
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -62,7 +65,7 @@
                             <td><img src="{{ asset($order->image) }}" alt="" style="max-width: 100px;"></td>
                             <td>{{ $order->product_name }}</td>
                             <td>{{ $order->user_name }}</td>
-                            <td>{{ $order->quatity }}</td>
+                            <td>{{ $order->quantity }}</td>
                             <td>
                                 @if($order->status_id == 1)
                                     <span class="badge bg-warning">{{$order->status_name}}</span>
@@ -103,6 +106,18 @@
             $('#to_date').datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true
+            });
+        });
+    </script>
+@endpush
+@push('after-scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#resetBtn').click(function(event) {
+                event.preventDefault()
+                // Clear all input and select fields
+                $('#searchForm').find('input[type="text"], select').val('');
+                window.location.replace(location.origin + location.pathname)
             });
         });
     </script>

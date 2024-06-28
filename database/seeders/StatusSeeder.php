@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Status;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class StatusSeeder extends Seeder
 {
@@ -13,13 +14,31 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
-        $statuses = [
-            ['name' => 'new'],
-            ['name' => 'buyer cancel'],
-            ['name' => 'admin cancel'],
-            ['name' => 'done'],
+        $status = [
+            [
+                'name' => 'New',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Buyer cancel',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Admin cancel',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Done',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
         ];
 
-        DB::table('status')->insert($statuses);
+        foreach ($status as $sta) {
+            $user = Status::create($sta);
+        }
     }
 }

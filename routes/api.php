@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\ApiCreateOrderController;
 use App\Http\Controllers\API\ApiProductController;
 use App\Http\Controllers\API\ApiCategoryController;
+use App\Http\Controllers\API\ApiTransactionHistoryController;
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\ApiHomeController;
 use Illuminate\Http\Request;
@@ -26,6 +28,7 @@ Route::group(['middleware' => ['token_auth']], function () {
     Route::get('/user',function (Request $request){
         return $request->user();
     });
+    Route::get('/transaction-history', [ApiTransactionHistoryController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
@@ -36,6 +39,7 @@ Route::get('/get-categories', [ApiCategoryController::class, 'index']);
 Route::get('/get-categories/{id}', [ApiCategoryController::class, 'show']);
 Route::get('/get-product', [ApiProductController::class, 'index']);
 Route::get('/get-product/{id}', [ApiProductController::class, 'show']);
+Route::post('/create-order', [ApiCreateOrderController::class, 'store']);
 
 
 
