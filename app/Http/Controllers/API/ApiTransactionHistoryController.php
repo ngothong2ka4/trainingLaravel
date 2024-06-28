@@ -16,11 +16,13 @@ class ApiTransactionHistoryController extends Controller
         // Lấy user id từ JWT
         $userId = auth()->user()->id;
 
-        // Truy vấn dữ liệu từ bảng orders với status là done
-        $orders = Order::where('user_id', $userId)
-            ->where('status_id', 2) // Status id 2 là done
-            ->with('orderItem.product') // Lấy thông tin sản phẩm từ order_items
-            ->get();
+        $orders = null;
+        //Kiểm tra id người dùng nếu đúng thì thực hiện lấy ra lịch sử giao dịch
+        if ($userId) {
+            $orders = Order::where('user_id', $userId)
+                ->with(['orderItem.apiProduct', 'status', 'apiUser'])
+                ->get();
+        }
 
         return $this->success($orders,'Get transaction history successfully!',200);
     }

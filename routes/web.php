@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageDetailProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -21,13 +22,12 @@ use App\Http\Controllers\Auth\Client\LoginController;
 
 Route::get('/', function () {
     return view('index');
-});
-Route::get('/detail-product', function () {
-    return view('fe.products.show');
-});
-Route::get('/login', function () {
-    return view('fe.auth.login');
-})->name('auth.login');
+})->name('homePage');
+
+Route::get('/404', function () {
+    return view('fe.404');
+})->name('page404');
+
 Route::get('/about', function () {
     return view('about');
 });
@@ -90,4 +90,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::group(['prefix' => 'fe'], function() {
 
     });
+});
+
+Route::get('/detail-product/{id}',[PageDetailProductController::class, 'show']);
+
+Route::fallback(function() {
+    return redirect()->route('page404');
 });

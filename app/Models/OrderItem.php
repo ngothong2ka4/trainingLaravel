@@ -9,6 +9,8 @@ class OrderItem extends Model
 {
     use HasFactory;
 
+    public $timestamps = FALSE;
+
     protected $fillable = [
         'order_id',
         'product_id',
@@ -23,5 +25,10 @@ class OrderItem extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function apiProduct()
+    {
+        return $this->belongsTo(Product::class,'product_id')->select('id','name', 'image');
     }
 }
