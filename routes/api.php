@@ -22,7 +22,9 @@ use App\Http\Controllers\Auth\LoginController;
 */
 
 
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->name('login.authenticate');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 Route::group(['middleware' => ['token_auth']], function () {
     Route::get('/user',function (Request $request){

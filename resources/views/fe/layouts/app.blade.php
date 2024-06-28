@@ -60,7 +60,10 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Include Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <div class="nav-top-area">
     <div class="container-fluid">
         <div class="row align-items-center">
@@ -110,20 +113,76 @@
                                 <span>2</span>
                             </button>
                         </li>
-                        <li>
-                            <a class="join" href="login.html">
+                        <li id="myLoginLinkLi">
+                            <a class="join" onclick="join()">
                                 <i class="flaticon-round-account-button-with-user-inside"></i>
                                 Join
                             </a>
                         </li>
+                        <li id="myAccountLinkLi" class=" navbar navbar-expand-lg navbar-light bg-light" >
+                            <a class="join nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <span id="userName"></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" onclick="orderlist()">Order List</a>
+                                <a class="dropdown-item" onclick="logout()">Logout</a>
+                            </div>
+                        </li>
                     </ul>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Include jQuery -->
+<script>
+    const token = localStorage.getItem('token');
+    const userData = JSON.parse(localStorage.getItem('user'));
 
+    if (token) {
+        // alert(123);
+        document.getElementById('myLoginLinkLi').style.display = 'none';
+        const userData = JSON.parse(localStorage.getItem('user'));
+        const userName = userData.name;
+        const userNameElement = document.getElementById('userName');
+        userNameElement.textContent = userName;
+    } else {
+        document.getElementById('myAccountLinkLi').style.display = 'none';
+    }
+
+    function logout() {
+        const token = localStorage.getItem('token');
+
+        fetch('http://127.0.0.1:8000/api/logout', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(data => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+
+                window.location.href = '/';
+            })
+            .catch(error => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+
+                window.location.href = '/';
+            });
+    }
+    function join(){
+        window.location.href = '/login';
+    }
+    function orderlist(){
+        window.location.href = '/listorder';
+    }
+</script>
 {{--Navbar--}}
 @include('fe.layouts.components.navbar')
 {{--End navbar--}}

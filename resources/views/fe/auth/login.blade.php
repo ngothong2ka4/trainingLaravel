@@ -8,7 +8,7 @@
     <div class="user-area ptb-100">
         <div class="container">
             <div class="user-item">
-                <form id="login-form" method="POST" action="{{ route('login.authenticate') }}">
+                <form id="login-form">
                     @csrf
                     <h2>Login</h2>
                     <div class="form-group">
@@ -50,41 +50,41 @@
             </div>
         </div>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.querySelector('form').addEventListener('submit', function (event) {
+            const form = document.querySelector('#login-form');
+            form.addEventListener('submit', function (event) {
                 event.preventDefault(); // Ngăn form submit mặc định
 
-                const email = document.querySelector('input[name="email"]').value;
-                const password = document.querySelector('input[name="password"]').value;
+                const email = form.querySelector('input[name="email"]').value;
+                const password = form.querySelector('input[name="password"]').value;
 
-                fetch('/api/login', {
+                fetch('http://127.0.0.1:8000/api/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                        'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value
                     },
                     body: JSON.stringify({
                         email: email,
                         password: password
                     })
                 })
-                    .then(response => {
-                        if (!response.ok) {
-                            123213;
-                            // throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.json();
-                    })
+                    .then(response => response.json()) // Chuyển phản hồi sang JSON
                     .then(data => {
-                        // Chuyển hướng đến trang khác
-                        // window.location.href = '/dashboard'; // Thay đổi link đến trang dashboard của bạn
+                        if (data.status === "Success") {
+                            localStorage.setItem('token', data.data.authorization.token);
+                            localStorage.setItem('user', JSON.stringify(data.data.user));
+                            window.location.href = '/'; // Thay đổi link đến trang dashboard của bạn
+                        } else {
+                            alert('Login failed: ' + data.message);
+                        }
                     })
                     .catch(error => {
-                        // Xử lý khi có lỗi
-                        // console.error('There was a problem with the fetch operation:', error);
-                        // alert('Login failed: ' + error.message);
+                        console.error('There was a problem with the fetch operation:', error);
+                        alert('Login failed: ' + error.message);
                     });
             });
         });

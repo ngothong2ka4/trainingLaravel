@@ -27,12 +27,15 @@ Route::get('/detail-product', function () {
 });
 Route::get('/login', function () {
     return view('fe.auth.login');
-});
+})->name('auth.login');
 Route::get('/about', function () {
     return view('about');
 });
 Route::get('/login', function () {
     return view('fe.auth.login');
+});
+Route::get('/listorder', function () {
+    return view('fe.listorder.listOrder');
 });
 /**
  * Auth Routes
