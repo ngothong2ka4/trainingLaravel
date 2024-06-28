@@ -19,7 +19,7 @@ class ApiCreateOrderController extends Controller
         try {
             //Lấy ra user_id từ request
             $user_id = auth()->user()->id;
-
+            dd($user_id);
             DB::beginTransaction();
             //Kiểm tra người dùng đã có bản ghi order hay chưa
             $order = Order::firstOrCreate(

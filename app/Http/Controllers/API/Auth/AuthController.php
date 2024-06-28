@@ -17,6 +17,7 @@ class AuthController extends Controller
     }
     public function login(ApiLoginRequest $request)
     {
+//        dd($request->all());
         $credentials = $request->only('email', 'password');
         $token = Auth('api')->attempt($credentials);
 

@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
 <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="{{ asset('fe/assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('fe/assets/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('fe/assets/js/form-validator.min.js') }}"></script>
