@@ -27,7 +27,7 @@
                                         <span>{{ $category['name'] }}</span>
                                     </div>
                                 </li>
-                                
+
                             @endforeach
                         </ul>
                     </div>
@@ -48,7 +48,7 @@
                                         {{-- <img src="" alt="Products"> --}}
                                         <div class="inner">
                                             <h3>
-                                                <a href="single-product.html">{{ $item['name'] }}</a>
+                                                <a href="{{route('detail-product',$item['id'])}}">{{ $item['name'] }}</a>
                                             </h3>
                                             <span>{{ number_format($item['price'], 0, '.', ',' )}} VNĐ</span>
                                         </div>
@@ -59,9 +59,9 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         @endforeach
-                        
+
                     </div>
                     <div class="text-center">
                         <a class="common-btn" href="shop.html">
