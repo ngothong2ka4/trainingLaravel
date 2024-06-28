@@ -57,7 +57,7 @@ User List
                 <tbody>
                     @foreach($users as $key=>$user)
                     <tr>
-                        <th scope="row">{{ $key + 1 }}</th>
+                        <th scope="row">{{ $loop->iteration + $users->perPage() * ($users->currentPage() - 1) }}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
@@ -68,19 +68,19 @@ User List
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('users.show', $user->id) }}">
-                                <i class="fas fa-eye" style="color: #000000;"></i>
+                            <a class="btn btn-info btn-sm" href="{{ route('users.show', $user->id) }}">
+                                <i class="fas fa-eye" style="color: #fff;"></i>
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('users.edit', $user->id) }}">
-                                <i class="fas fa-pencil-alt" style="color: #000000;"></i>
+                            <a class="btn btn-primary btn-sm" href="{{ route('users.edit', $user->id) }}">
+                                <i class="fas fa-pencil-alt" style="color: #fff;"></i>
                             </a>
                         </td>
                         <td>
                             {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline', 'id' => 'delete-form-' . $user->id]) !!}
-                                <button type="button" style="background: none; border: none; padding: 0; margin: 0; color: #000000;" onclick="confirmDelete({{ $user->id }})">
-                                    <i class="fas fa-trash-alt"></i>
+                                <button class="btn btn-danger btn-sm" type="button"  onclick="confirmDelete({{ $user->id }})">
+                                    <i class="fas fa-trash-alt" style="color: #fff;"></i>
                                 </button>
                             {!! Form::close() !!}
                         </td>
@@ -101,6 +101,7 @@ User List
 @push('before-scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
     <script>
+        
         function confirmDelete(userId) {
         Swal.fire({
             title: 'Are you sure?',
@@ -116,5 +117,14 @@ User List
             }
         })
         }
+
+        @if(session('msg'))
+            Swal.fire({
+                title: 'Success!',
+                text: '{{ session('msg') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @endif
     </script>
 @endpush

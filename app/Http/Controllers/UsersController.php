@@ -74,8 +74,7 @@ class UsersController extends Controller
             'password' => Hash::make($request->password),
         ]));
 
-        return redirect()->route('users.index')
-            ->withSuccess(__('User created successfully.'));
+        return redirect()->route('users.index')->with('msg','Create user successfully!');
     }
 
     /**
@@ -123,7 +122,7 @@ class UsersController extends Controller
         $user->update($request->validated());
 
 
-        return redirect()->route('categories.index')->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('msg','Update user successfully!');
     }
 
     /**
