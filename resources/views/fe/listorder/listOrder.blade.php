@@ -1,9 +1,5 @@
 @extends('fe.layouts.app')
 
-{{--@section('banner')--}}
-{{--    @include('fe.layouts.components.page-title-area')--}}
-{{--@endsection--}}
-
 @section('content')
     <div class="product-details-area ptb-100">
         <div class="container">
@@ -73,19 +69,21 @@
                                 <td>${createdAt}</td> <!-- Định dạng ngày tạo -->
                                 <td>${updatedAt}</td> <!-- Định dạng ngày cập nhật -->
                                 <td>
-                                    ${order.status.name === 'New' ? `<input type="button" value="Cancel Order" onclick="cancelOrder(${order.id})">` : 'N/A'}
+                                    ${order.status.name === 'New' ? `<input type="button" value="Cancel Order" onclick="cancelOrder(${item.id})">` : 'N/A'}
                                 </td>
                             `;
                                 tbody.appendChild(tr);
                             });
                         });
+                    } else {
+                        console.error('Failed to fetch transaction history:', data.message);
                     }
                 })
                 .catch(error => console.error('Error fetching transaction history:', error));
         });
 
-        function cancelOrder(orderId) {
-            fetch(`http://traininglaravel.test/api/cancel-order/${orderId}`, {
+        function cancelOrder(orderItemId) {
+            fetch(`http://traininglaravel.test/api/cancel-order/${orderItemId}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -99,9 +97,13 @@
                         location.reload(); // Reload the page to reflect the changes
                     } else {
                         alert('Failed to cancel the order. Please try again.');
+                        console.error('Failed to cancel the order:', data.message);
                     }
                 })
-                .catch(error => console.error('Error cancelling order:', error));
+                .catch(error => {
+                    alert('Error cancelling order. Please try again.');
+                    console.error('Error cancelling order:', error);
+                });
         }
     </script>
 @endsection
