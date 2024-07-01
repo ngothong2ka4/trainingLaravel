@@ -26,14 +26,14 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.authenticat
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::group(['middleware' => ['token_auth']], function () {
+Route::group(['middleware' => ['token_auth'] , 'as' => 'api.'], function () {
     Route::get('/user',function (Request $request){
         return $request->user();
     });
-    Route::get('/transaction-history', [ApiTransactionHistoryController::class, 'index']);
-    Route::post('cancel-order/{orderId}', [ApiTransactionHistoryController::class, 'cancelOrder']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/create-order', [ApiCreateOrderController::class, 'store']);
+    Route::get('/transaction-history', [ApiTransactionHistoryController::class, 'index'])
+        ->name('transaction-history');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/create-order', [ApiCreateOrderController::class, 'store'])->name('create-order');
 });
 
 Route::get('/', [ApiHomeController::class, 'index']);

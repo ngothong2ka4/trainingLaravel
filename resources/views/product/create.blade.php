@@ -55,14 +55,13 @@
                             <div class="mb-3">
                                 <label for="status" class="form-label">Status</label>
                                 <select class="form-select mb-3" name="status" aria-label="Default select example">
-                                    <option value="" selected>Open this select status</option>
-                                    <option value="1">Active</option>
+                                    <option value="1" selected>Active</option>
                                     <option value="0">Inactive</option>
                                 </select>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('product.index') }}" class="btn btn-success text-light">Back</a>
-                                <button type="submit" class="btn btn-primary">Save user</button>
+                                <button type="submit" class="btn btn-primary">Save product</button>
                             </div>
                             <input type="hidden" value="" name="id">
                         </form>
