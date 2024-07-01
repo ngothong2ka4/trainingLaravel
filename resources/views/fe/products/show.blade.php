@@ -96,14 +96,18 @@
                                 <img src="{{ asset( $related_product->image ) }}" alt="Products" style="border-radius: 10px">
                                 <div class="inner">
                                     <h3>
-                                        <a href="">{{ $related_product->name }}</a>
+                                        <a href="{{route('detail-product',$related_product->id)}}">
+                                            {{ $related_product->name }}</a>
                                     </h3>
                                     <span>{{ $related_product->price }}</span>
                                 </div>
                             </div>
                             <div class="bottom">
-                                <a class="cart-text" href="#">Buy</a>
-                                <i class="bx bx-plus"></i>
+                                <form class="related-product-form d-flex">
+                                    <input type="hidden" name="quantity" value="1" />
+                                    <input type="hidden" name="product_id" value="{{ $related_product->id }}">
+                                    <i class="bx bx-plus quick-buy"></i>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -113,9 +117,11 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const form = document.querySelector('#buy-product-form');
-            form.addEventListener('submit', function (event) {
-                event.preventDefault(); // Ngăn form submit mặc định
+            const mainForm = document.querySelector('#buy-product-form');
+            const quickBuyButtons = document.querySelectorAll('.quick-buy');
+
+            function createOrder(event, form) {
+                event.preventDefault(); // Ngăn sự kiện mặc định nếu cần
 
                 const token = localStorage.getItem('token');
 
@@ -183,23 +189,19 @@
                             confirmButtonText: 'OK'
                         });
                     });
+            }
+
+            // Thêm sự kiện submit cho form chi tiết sản phẩm
+            mainForm.addEventListener('submit', function(event) {
+                createOrder(event, mainForm);
             });
 
-            // Xử lý sự kiện tăng giảm số lượng
-            const minusButton = form.querySelector('.minus');
-            const plusButton = form.querySelector('.plus');
-            const quantityInput = form.querySelector('input[name="quantity"]');
-
-            minusButton.addEventListener('click', function () {
-                let quantity = parseInt(quantityInput.value);
-                if (quantity > 1) {
-                    quantityInput.value = quantity;
-                }
-            });
-
-            plusButton.addEventListener('click', function () {
-                let quantity = parseInt(quantityInput.value);
-                quantityInput.value = quantity;
+            // Thêm sự kiện click cho từng nút quick buy trong sản phẩm liên quan
+            quickBuyButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    const form = button.closest('.related-product-form');
+                    createOrder(event, form);
+                });
             });
         });
     </script>
