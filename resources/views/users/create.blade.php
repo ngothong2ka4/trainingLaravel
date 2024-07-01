@@ -6,78 +6,82 @@ Create User
 
 
 @section('content')
-    <div class="bg-light p-4 rounded">
-        <h1>Add New User</h1>
-        <div class="lead">
-            Add new users and assign roles.
+<div class="bg-light rounded">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Add new product</h5>
+            <div class="p-4 rounded">
+                <div class="container mt-4">
+
+                    <form method="POST" action="" id="userForm">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input value="{{ old('name') }}" 
+                                type="text" 
+                                class="form-control" 
+                                name="name" 
+                                placeholder="Name" required>
+                    
+                            @error('name')
+                                span class="text-danger">{{ $message }}</span>
+                            @enderror
+                    
+                            @if ($errors->has('name'))
+                                <span class="text-danger text-left">{{ $errors->first('name') }}</span>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input value="{{ old('email') }}"
+                                type="email" 
+                                class="form-control" 
+                                name="email" 
+                                placeholder="Email address" required>
+                    
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                    
+                            @if ($errors->has('email'))
+                                <span class="text-danger text-left">{{ $errors->first('email') }}</span>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input value="{{ old('password') }}"
+                                type="text" 
+                                class="form-control" id="password"
+                                name="password" 
+                                placeholder="password" required>
+                    
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                    
+                            @if ($errors->has('password'))
+                                <span class="text-danger text-left">{{ $errors->first('password') }}</span>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Type</label>
+                            <select name="type" id="" class="form-select">
+                                    <option value="1">Admin</option>
+                                    <option value="2">User</option>
+                            </select>
+                            @if ($errors->has('type'))
+                                <span class="text-danger text-left">{{ $errors->first('type') }}</span>
+                            @endif
+                        </div>
+                    
+                        <button type="submit" class="btn btn-primary">Save user</button>
+                        <a href="{{ route('users.index') }}" class="btn btn-default">Back</a>
+                    </form>
+                </div>
+
+            </div>
         </div>
-
-        <div class="container mt-4">
-            <form method="POST" action="" id="userForm">
-                @csrf
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input value="{{ old('name') }}" 
-                        type="text" 
-                        class="form-control" 
-                        name="name" 
-                        placeholder="Name" required>
-
-                    @error('name')
-                        span class="text-danger">{{ $message }}</span>
-                    @enderror
-
-                    @if ($errors->has('name'))
-                        <span class="text-danger text-left">{{ $errors->first('name') }}</span>
-                    @endif
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input value="{{ old('email') }}"
-                        type="email" 
-                        class="form-control" 
-                        name="email" 
-                        placeholder="Email address" required>
-
-                    @error('email')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-
-                    @if ($errors->has('email'))
-                        <span class="text-danger text-left">{{ $errors->first('email') }}</span>
-                    @endif
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input value="{{ old('password') }}"
-                        type="text" 
-                        class="form-control" id="password"
-                        name="password" 
-                        placeholder="password" required>
-
-                    @error('password')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-
-                    @if ($errors->has('password'))
-                        <span class="text-danger text-left">{{ $errors->first('password') }}</span>
-                    @endif
-                </div>
-                <div class="mb-3">
-                    <label for="type" class="form-label">Type</label>
-                    <select name="type" id="" class="form-select">
-                            <option value="1">Admin</option>
-                            <option value="2">User</option>
-                    </select>
-                    @if ($errors->has('type'))
-                        <span class="text-danger text-left">{{ $errors->first('type') }}</span>
-                    @endif
-                </div>
-
-                <button type="submit" class="btn btn-primary">Save user</button>
-                <a href="{{ route('users.index') }}" class="btn btn-default">Back</a>
-            </form>
-        </div>
+    </div>
 
     </div>
     
