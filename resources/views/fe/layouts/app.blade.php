@@ -169,10 +169,11 @@
                 window.location.href = '/';
             })
             .catch(error => {
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-
-                window.location.href = '/';
+                alert(123);
+                // localStorage.removeItem('token');
+                // localStorage.removeItem('user');
+                //
+                // window.location.href = '/';
             });
     }
     function join(){

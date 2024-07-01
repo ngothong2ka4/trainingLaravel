@@ -19,6 +19,7 @@
                         <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="invalid-feedback" id="password-error"></div>
                     </div>
+                    <div class="alert alert-danger" id="login-error" style="display: none;"></div>
                     <button type="submit" class="btn common-btn">
                         Login
                         <img src="assets/images/shape1.png" alt="Shape">
@@ -49,6 +50,7 @@
             const form = document.querySelector('#login-form');
             const emailError = document.getElementById('email-error');
             const passwordError = document.getElementById('password-error');
+            const loginError = document.getElementById('login-error');
 
             form.addEventListener('submit', function (event) {
                 event.preventDefault(); // Ngăn form submit mặc định
@@ -59,19 +61,32 @@
                 // Reset lỗi
                 emailError.textContent = '';
                 passwordError.textContent = '';
+                loginError.style.display = 'none';
+                loginError.textContent = '';
 
                 let hasError = false;
 
                 // Kiểm tra email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!email) {
                     emailError.textContent = 'Email không được để trống.';
+                    emailError.style.display = 'block';
                     hasError = true;
+                } else if (!emailRegex.test(email)) {
+                    emailError.textContent = 'Email không đúng định dạng.';
+                    emailError.style.display = 'block';
+                    hasError = true;
+                } else {
+                    emailError.style.display = 'none';
                 }
 
                 // Kiểm tra password
                 if (!password) {
                     passwordError.textContent = 'Mật khẩu không được để trống.';
+                    passwordError.style.display = 'block';
                     hasError = true;
+                } else {
+                    passwordError.style.display = 'none';
                 }
 
                 if (hasError) {
@@ -90,19 +105,21 @@
                         password: password
                     })
                 })
-                    .then(response => response.json()) // Chuyển phản hồi sang JSON
+                    .then(response => response.json())
                     .then(data => {
                         if (data.status === "Success") {
                             localStorage.setItem('token', data.data.authorization.token);
                             localStorage.setItem('user', JSON.stringify(data.data.user));
-                            window.location.href = '/'; // Thay đổi link đến trang dashboard của bạn
+                            window.location.href = '/';
                         } else {
-                            alert('Login failed: ' + data.message);
+                            loginError.textContent = 'Tài khoản hoặc mật khẩu không chính xác.';
+                            loginError.style.display = 'block';
                         }
                     })
                     .catch(error => {
                         console.error('There was a problem with the fetch operation:', error);
-                        alert('Login failed: ' + error.message);
+                        loginError.textContent = 'Có lỗi xảy ra. Vui lòng thử lại.';
+                        loginError.style.display = 'block';
                     });
             });
         });
