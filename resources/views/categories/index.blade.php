@@ -64,11 +64,14 @@
                                 </a>
                             </td>
                             <td>
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category->id], 'style' => 'display:inline', 'id' => 'delete-form-' . $category->id]) !!}
-                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $category->id }})">
-                                    <i class="fas fa-trash-alt" style="color: #fff;"></i>
-                                </button>
-                                {!! Form::close() !!}
+                                <form id="delete-form-{{ $category->id }}" action="{{ route('categories.destroy', $category->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="button" onclick="confirmDelete({{ $category->id }}, '{{ $category->name }}')"
+                                            class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt" style="color: #fff;"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

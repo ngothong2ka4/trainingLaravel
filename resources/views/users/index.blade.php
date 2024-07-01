@@ -79,11 +79,14 @@ User List
                             </a>
                         </td>
                         <td>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline', 'id' => 'delete-form-' . $user->id]) !!}
-                                <button class="btn btn-danger btn-sm" type="button"  onclick="confirmDelete({{ $user->id }})">
+                            <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="button" onclick="confirmDelete({{ $user->id }}, '{{ $user->name }}')"
+                                        class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash-alt" style="color: #fff;"></i>
                                 </button>
-                            {!! Form::close() !!}
+                            </form>
                         </td>
                     </tr>
                     @endforeach

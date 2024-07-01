@@ -14,13 +14,13 @@ class Order extends Model
         'status_id',
         'price',
     ];
+
+    protected $casts = [
+        'price' => 'float',
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-    public function orderItems()
-    {
-        return $this->belongsTo(OrderItem::class);
     }
     public function status()
     {
@@ -28,6 +28,10 @@ class Order extends Model
 
     }
     public function orderItem()
+    {
+        return $this->belongsTo(OrderItem::class);
+    }
+    public function orderItems()
     {
         return $this->hasMany(OrderItem::class,'order_id');
     }

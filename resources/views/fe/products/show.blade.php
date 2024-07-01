@@ -145,7 +145,7 @@
                     ]
                 };
 
-                fetch('http://traininglaravel.test/api/create-order', {
+                fetch('http://127.0.0.1:8000/api/create-order', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
