@@ -17,18 +17,18 @@
             <div class="card-body">
                 <h5 class="card-title">Categories</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Manage your categories here.</h6>
-                    <form action="{{ route('categories.index') }}" method="GET" id="searchForm" class="d-flex align-items-center">
-                        <div class="col-auto me-2">
-                            <label>Category</label>
-                            <input type="text" name="search" class="form-control" placeholder="Search by category name" value="{{ request()->get('search') }}">
-                        </div>
-                        <div class="col-auto mt-4">
-                            <button type="submit" class="btn btn-outline-primary">Search</button>
-                        </div>
-                        <div class="col-auto mt-4 mx-2">
-                            <button type="button" id="resetBtn" class="btn btn-outline-danger">Reset</button>
-                        </div>
-                    </form>
+                <form action="{{ route('categories.index') }}" method="GET" id="searchForm" class="d-flex align-items-center">
+                    <div class="col-auto me-2">
+                        <label>Category</label>
+                        <input type="text" name="search" class="form-control" placeholder="Search by category name" value="{{ request()->get('search') }}">
+                    </div>
+                    <div class="col-auto mt-4">
+                        <button type="submit" class="btn btn-outline-primary">Search</button>
+                    </div>
+                    <div class="col-auto mt-4 mx-2">
+                        <button type="button" id="resetBtn" class="btn btn-outline-danger">Reset</button>
+                    </div>
+                </form>
                 <div class="text-end">
                     <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm float-right">Add categories</a>
                 </div>
@@ -64,11 +64,14 @@
                                 </a>
                             </td>
                             <td>
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category->id], 'style' => 'display:inline', 'id' => 'delete-form-' . $category->id]) !!}
-                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $category->id }})">
-                                    <i class="fas fa-trash-alt" style="color: #fff;"></i>
-                                </button>
-                                {!! Form::close() !!}
+                                <form id="delete-form-{{ $category->id }}" action="{{ route('categories.destroy', $category->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="button" onclick="confirmDelete({{ $category->id }}, '{{ $category->name }}')"
+                                            class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt" style="color: #fff;"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

@@ -84,9 +84,13 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        $category->delete();
+        try {
+            $category->delete();
 
-        return redirect()->route('categories.index')->with('msg', 'Category deleted successfully.');
+            return redirect()->route('categories.index')->with('msg', 'Category deleted successfully.');
+        } catch (\Exception $exception) {
+            return redirect()->route('dashboard')->withErrors('Data not found!');
+        }
     }
 
 }

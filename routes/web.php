@@ -36,6 +36,9 @@ Route::get('/about', function () {
 Route::get('/login', function () {
     return view('fe.auth.login');
 });
+Route::get('/listorder', function () {
+    return view('fe.listorder.listOrder');
+});
 /**
  * Auth Routes
  */

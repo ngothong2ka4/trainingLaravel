@@ -32,6 +32,7 @@ Route::group(['middleware' => ['token_auth'] , 'as' => 'api.'], function () {
     });
     Route::get('/transaction-history', [ApiTransactionHistoryController::class, 'index'])
         ->name('transaction-history');
+    Route::post('cancel-order/{orderId}', [ApiTransactionHistoryController::class, 'cancelOrder']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/create-order', [ApiCreateOrderController::class, 'store'])->name('create-order');
 });
