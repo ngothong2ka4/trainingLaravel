@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
@@ -49,9 +50,13 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-        return view('categories.show', compact('category'));
+        try {
+            $category = Category::findOrFail($id);
 
+            return view('categories.show', compact('category'));
+        } catch (\Exception $exception) {
+            return redirect()->route('dashboard')->withErrors('Data not found!');
+        }
     }
 
     public function edit($id)
@@ -77,7 +82,8 @@ class CategoryController extends Controller
 
         } catch (ModelNotFoundException $e) {
 
-            return redirect()->route('categories.index');
+            DB::rollBack();
+            return redirect()->back()->withErrors('Error saving product!');;
         }
     }
 
