@@ -62,7 +62,7 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('product.index') }}" class="btn btn-success text-light">Back</a>
-                                <button type="submit" class="btn btn-primary">Save user</button>
+                                <button type="submit" class="btn btn-primary">Save product</button>
                             </div>
                             <input type="hidden" value="" name="id">
                         </form>
