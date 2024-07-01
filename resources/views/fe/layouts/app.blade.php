@@ -106,13 +106,6 @@
                     <ul>
                         <li>
                         </li>
-                        <li>
-                            <button type="button" class="btn wishlist cart-popup-btn" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-                                <i class="bx bxs-cart"></i>
-                                <span>2</span>
-                            </button>
-                        </li>
                         <li id="myLoginLinkLi">
                             <a class="join" onclick="join()">
                                 <i class="flaticon-round-account-button-with-user-inside"></i>
@@ -155,7 +148,7 @@
     function logout() {
         const token = localStorage.getItem('token');
 
-        fetch('http://127.0.0.1:8000/api/logout', {
+        fetch('http://traininglaravel.test/api/logout', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -170,10 +163,9 @@
             })
             .catch(error => {
                 alert(123);
-                // localStorage.removeItem('token');
-                // localStorage.removeItem('user');
-                //
-                // window.location.href = '/';
+                // console.error('There was a problem with the fetch operation:', error);
+                // loginError.textContent = 'Có lỗi xảy ra. Vui lòng thử lại.';
+                // loginError.style.display = 'block';
             });
     }
     function join(){
