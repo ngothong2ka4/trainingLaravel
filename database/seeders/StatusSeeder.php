@@ -21,7 +21,7 @@ class StatusSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'name' => 'Buyer cancel',
+                'name' => 'Done',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
@@ -31,7 +31,7 @@ class StatusSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'name' => 'Done',
+                'name' => 'Buyer cancel',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]

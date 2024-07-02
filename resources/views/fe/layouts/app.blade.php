@@ -69,7 +69,7 @@
         <div class="row align-items-center">
             <div class="col-lg-2">
                 <div class="left">
-                    <a href="index.html">
+                    <a href="{{ route('homePage') }}">
                         <img src="{{ asset('fe/assets/images/logo.png') }}" alt="Logo" class="img-logo">
                     </a>
                 </div>
@@ -147,7 +147,10 @@
 
     function logout() {
         const token = localStorage.getItem('token');
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         fetch('http://traininglaravel.test/api/logout', {
             method: 'POST',
             headers: {
@@ -158,14 +161,17 @@
             .then(data => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
-
                 window.location.href = '/';
             })
             .catch(error => {
+<<<<<<< Updated upstream
                 alert(123);
                 // console.error('There was a problem with the fetch operation:', error);
                 // loginError.textContent = 'Có lỗi xảy ra. Vui lòng thử lại.';
                 // loginError.style.display = 'block';
+=======
+                console.error('Error logging out:', error);
+>>>>>>> Stashed changes
             });
     }
     function join(){

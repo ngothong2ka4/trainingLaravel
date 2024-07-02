@@ -44,7 +44,7 @@
                                         <a class="wishlist" href="#">
                                             <i class="bx bx-heart"></i>
                                         </a>
-                                        <img src="{{ asset($item['image']) }}" alt="Products">
+                                        <img src="{{ asset($item['image']) }}" alt="Products" style="border-radius: 10px;">
                                         {{-- <img src="" alt="Products"> --}}
                                         <div class="inner">
                                             <h3>

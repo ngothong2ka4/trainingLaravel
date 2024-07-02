@@ -1,7 +1,7 @@
 <div class="navbar-area sticky-top">
 
     <div class="mobile-nav">
-        <a href="index.html" class="logo">
+        <a href="{{ route('homePage') }}" class="logo">
             <img src="{{ asset('fe/assets/images/logo.png') }}" alt="Logo" class="img-logo">
         </a>
     </div>
@@ -12,7 +12,7 @@
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="#" class="nav-link dropdown-toggle active">Home</a>
+                            <a href="{{ route('homePage') }}" class="nav-link dropdown-toggle active">Home</a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link dropdown-toggle">Pages</a>

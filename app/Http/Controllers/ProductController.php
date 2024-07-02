@@ -19,12 +19,12 @@ class ProductController extends Controller
     {
         $name = $request->input('name', null);
         $category_id = $request->input('category_id', null);
-        $price = $request->input('price',null);
-        $sold = $request->input('sold',null);
+        $price = $request->input('price', null);
+        $sold = $request->input('sold', null);
 
         $products = Product::query();
 
-        if ($name){
+        if ($name) {
             $products->where('name', 'like', '%' . $name . '%');
         }
 
@@ -32,6 +32,7 @@ class ProductController extends Controller
             $products->where('category_id', $category_id);
         }
 
+        // Sắp xếp theo price hoặc sold trước
         if ($price) {
             $products->orderBy('price', $price);
         }
@@ -40,8 +41,12 @@ class ProductController extends Controller
             $products->orderBy('sold', $sold);
         }
 
-        $products = $products->latest('updated_at')
-            ->paginate(10);
+        // Sắp xếp mặc định theo updated_at nếu không có điều kiện sắp xếp nào khác
+        if (empty($price) && empty($sold)) {
+            $products->latest('updated_at');
+        }
+
+        $products = $products->paginate(5)->appends($request->except('page'));
         $categories = Category::select('id', 'name')->get();
 
         return view('product.index', compact(

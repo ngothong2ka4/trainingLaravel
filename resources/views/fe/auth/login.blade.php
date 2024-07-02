@@ -22,8 +22,8 @@
                     <div class="alert alert-danger" id="login-error" style="display: none;"></div>
                     <button type="submit" class="btn common-btn">
                         Login
-                        <img src="assets/images/shape1.png" alt="Shape">
-                        <img src="assets/images/shape2.png" alt="Shape">
+                        <img src="{{ asset('fe/assets/images/shape1.png') }}" alt="Shape">
+                        <img src="{{ asset('fe/assets/images/shape2.png') }}" alt="Shape">
                     </button>
                     <h4>Or</h4>
                     <ul>
