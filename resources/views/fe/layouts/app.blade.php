@@ -156,7 +156,11 @@
     function logout() {
         const token = localStorage.getItem('token');
 
+<<<<<<< Updated upstream
         fetch('http://127.0.0.1:8000/api/logout', {
+=======
+        fetch('http://traininglaravel.test/api/logout', {
+>>>>>>> Stashed changes
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -170,10 +174,17 @@
                 window.location.href = '/';
             })
             .catch(error => {
+<<<<<<< Updated upstream
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
 
                 window.location.href = '/';
+=======
+                alert(123);
+                // console.error('There was a problem with the fetch operation:', error);
+                // loginError.textContent = 'Có lỗi xảy ra. Vui lòng thử lại.';
+                // loginError.style.display = 'block';
+>>>>>>> Stashed changes
             });
     }
     function join(){

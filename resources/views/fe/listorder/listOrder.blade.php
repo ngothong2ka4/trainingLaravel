@@ -1,5 +1,12 @@
 @extends('fe.layouts.app')
 
+<<<<<<< Updated upstream
+=======
+{{--@section('banner')--}}
+{{--    @include('fe.layouts.components.page-title-area')--}}
+{{--@endsection--}}
+
+>>>>>>> Stashed changes
 @section('content')
     <div class="product-details-area ptb-100">
         <div class="container">
@@ -82,8 +89,13 @@
                 .catch(error => console.error('Error fetching transaction history:', error));
         });
 
+<<<<<<< Updated upstream
         function cancelOrder(orderItemId) {
             fetch(`http://traininglaravel.test/api/cancel-order/${orderItemId}`, {
+=======
+        function cancelOrder(orderId) {
+            fetch(`http://traininglaravel.test/api/cancel-order/${orderId}`, {
+>>>>>>> Stashed changes
                 method: 'POST',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -97,6 +109,7 @@
                         location.reload(); // Reload the page to reflect the changes
                     } else {
                         alert('Failed to cancel the order. Please try again.');
+<<<<<<< Updated upstream
                         console.error('Failed to cancel the order:', data.message);
                     }
                 })
@@ -104,6 +117,11 @@
                     alert('Error cancelling order. Please try again.');
                     console.error('Error cancelling order:', error);
                 });
+=======
+                    }
+                })
+                .catch(error => console.error('Error cancelling order:', error));
+>>>>>>> Stashed changes
         }
     </script>
 @endsection
